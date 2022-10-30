@@ -1,0 +1,3 @@
+"use strict";
+const DEFAULT_PAGE_SIZE = 15;
+exports.DEFAULT_PAGE_SIZE = DEFAULT_PAGE_SIZE;

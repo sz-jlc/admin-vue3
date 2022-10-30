@@ -1,0 +1,20 @@
+{
+  "name": "jlc-admin-vue3-docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev .",
+    "build": "vitepress build .",
+    "serve": "vitepress serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sz-jlc/admin-vue3": "workspace:^1.0.0",
+    "element-plus": "^2.2.19",
+    "vitepress": "1.0.0-alpha.26",
+    "vue": "^3.2.41"
+  }
+}

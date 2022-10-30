@@ -1,0 +1,30 @@
+.filter__form {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    margin-bottom: 15px;
+    margin-right: 0;
+    padding-right: 12px;
+    flex: 0 0 20%;
+    height: 32px;
+    box-sizing: border-box;
+    &__label {
+      word-break: keep-all;
+    }
+  }
+
+  :deep(.el-input__wrapper) {
+    width: 100%;
+  }
+}
+
+.filter__ctrl {
+  margin-bottom: 15px;
+  margin-left: 12px;
+}
+
+.w-full {
+  width: 100%!important;
+}
