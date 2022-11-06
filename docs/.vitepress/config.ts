@@ -55,5 +55,5 @@ export default defineConfig({
   ignoreDeadLinks: true,
   lastUpdated: true,
   cleanUrls: 'with-subfolders',
-  base: '/admin-vue3/'
+  base: '/admin-vue3/dist/'
 })
