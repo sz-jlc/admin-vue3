@@ -1,6 +1,2 @@
-## 待修复问题
-1. global.d.ts未生效
-2. 热更新@sz-jlc/admin-vue3 /dist.style.css 403
-
-
-  
+# 待修复问题
+1. 组件库`global.d.ts`引入到`tsconfig.json -> types`中未生效

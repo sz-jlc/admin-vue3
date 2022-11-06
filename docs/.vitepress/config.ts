@@ -6,7 +6,7 @@ export default defineConfig({
     nav: [
       { text: '指南', link: '/guide/index' },
       { text: '组件', link: '/component/filter/index.html' },
-      { text: '贡献', link: '/contribution/index' },
+      { text: '贡献', link: '/contribution/todo/issue' },
       { text: 'Github', link: 'https://github.com/sz-jlc/admin-vue3' }
     ],
     sidebar: {
@@ -19,20 +19,20 @@ export default defineConfig({
             { text: 'Page', link: '/component/page/index.html' },
             { text: 'ProTable', link: '/component/pro-table/index.html' },
             // { text: 'ProList', link: '/component/pro-list/index.html' },
-            { text: 'TreeTransfer', link: '/component/tree-transfer/index.html' },
+            // { text: 'TreeTransfer', link: '/component/tree-transfer/index.html' },
             // { text: 'AoeDialog', link: '/component/aoe-dialog/index.html' },
             // { text: 'AoeDrawer', link: '/component/aoe-drawer/index.html' },
           ]
         }
       ],
       '/contribution/': [
-        {
-          text: '贡献指南',
-          items: [
-            { text: '新增组件', link: '/' },
-            { text: '修复组件', link: '/' },
-          ]
-        },
+        // {
+        //   text: '贡献指南',
+        //   items: [
+        //     { text: '新增组件', link: '/' },
+        //     { text: '修复组件', link: '/' },
+        //   ]
+        // },
         {
           text: '待办项',
           items: [
