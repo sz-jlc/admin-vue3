@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://sz-jlc.github.io/admin-vue3",
   "private": true,
   "scripts": {},
   "keywords": [],

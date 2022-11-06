@@ -5,6 +5,10 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "es/index.d.ts",
+  "homepage": "https://sz-jlc.github.io/admin-vue3",
+  "repository": {
+    "git": "https://github.com/sz-jlc/admin-vue3"
+  },
   "private": false,
   "directories": {
     "lib": "lib"
