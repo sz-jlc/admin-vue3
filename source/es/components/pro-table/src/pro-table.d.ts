@@ -27,70 +27,36 @@ export declare const propsType: {
         default: boolean;
     };
     filterProps: {
-        type: PropType<Partial<{
-            filters: {
-                type: PropType<import('../../../components/filter/src/filter').FilterItem[]>;
-                default: () => never[];
-                required: boolean;
-            };
-            columnCount: {
-                type: NumberConstructor;
-                default: number;
-            };
-        }>>;
+        type: ObjectConstructor;
         default: () => {};
     };
     filterEvents: {
-        type: PropType<VueEvents>;
+        type: ObjectConstructor;
         default: () => {};
     };
     tableProps: {
-        type: PropType<Partial<{
-            columns: {
-                type: PropType<import('../../../components/table/src/table').Column[]>;
-                default: () => never[];
-                required: boolean;
-            };
-            loading: {
-                type: BooleanConstructor;
-                default: boolean;
-            };
-            error: {
-                type: BooleanConstructor;
-                default: boolean;
-            };
-            update: {
-                type: BooleanConstructor;
-                default: boolean;
-            };
-            delete: {
-                type: BooleanConstructor;
-                default: boolean;
-            };
-        }>>;
+        type: ObjectConstructor;
         default: () => {};
     };
     tableEvents: {
-        type: PropType<VueEvents>;
+        type: ObjectConstructor;
         default: () => {};
     };
     pageProps: {
-        type: PropType<Partial<{
-            total: {
-                type: NumberConstructor;
-                required: boolean;
-            };
-        }>>;
+        type: ObjectConstructor;
         default: () => {};
     };
     pageEvents: {
-        type: PropType<VueEvents>;
+        type: ObjectConstructor;
         default: () => {};
     };
 };
 export interface ExoprtFns {
+    query: Function;
     refresh: Function;
+    setFilter: Function;
     resetFilter: Function;
+    setPage: Function;
     resetPage: Function;
     filter: any;
     table: any;

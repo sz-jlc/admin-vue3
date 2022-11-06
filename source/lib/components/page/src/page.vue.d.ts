@@ -18,7 +18,14 @@ declare const _sfc_main: import("vue").DefineComponent<{
     pageInfo: PageInfo;
     onCurrentChange: (current: number) => void;
     onSizeChange: (size: number) => void;
-    query: (queryNow?: boolean) => void;
+    query: (queryNow?: boolean) => {
+        pageNum: number;
+        pageSize: number;
+    };
+    setPage: (_pageInfo: object, queryNow?: boolean) => {
+        pageNum: number;
+        pageSize: number;
+    };
     reset: (queryNow?: boolean, resetSize?: boolean) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, string[], string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     total: {

@@ -11,10 +11,10 @@
     </el-table-column>
     <template #empty>
       <div v-show="!loading">
-        <div class="table__state" v-if="!error">
+        <div v-if="!error" class="table__state">
           <div>无数据</div>
         </div>
-        <div class="table__state" v-else>
+        <div v-else class="table__state">
           <div>网络错误</div>
         </div>
       </div>
@@ -26,9 +26,7 @@
   import { h } from 'vue'
   import { ElButton } from 'element-plus'
   import { isEmpty } from '@/utils/tools'
-  import { getEpTableCommonFns } from '@/utils/ep-table-common'
   import { propsType, emitsType } from './table'
-  import type { ExoprtFns } from './table'
   import type { VNode } from 'vue'
   import type { AnyObj } from '@/types'
 
@@ -127,19 +125,27 @@
     return result
   })
   
-  const exoprtFns: ExoprtFns = {
-    epTable: tableRef,
+  const exoprtFns = {
     clearSelection: () => {},
     getSelectionRows: () => {},
     toggleRowSelection: () => {},
     toggleAllSelection: () => {},
     toggleRowExpansion: () => {},
     setCurrentRow: () => {},
+    clearSort: () => {},
+    clearFilter: () => {},
+    doLayout: () => {},
+    sort: () => {},
+    scrollTo: () => {},
+    setScrollTop: () => {},
+    setScrollLeft: () => {},
   }
 
-  // 将element-plus表格的一些常用方法取出来
+  // 将element-plus表格的方法取出来
   onMounted(() => {
-    Object.assign(exoprtFns, getEpTableCommonFns(tableRef.value))
+    Object.keys(exoprtFns).forEach(key => {
+      exoprtFns[key as keyof typeof exoprtFns] = tableRef.value[key]
+    })
   })
 
   defineExpose(exoprtFns)

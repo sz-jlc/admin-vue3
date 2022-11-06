@@ -1291,6 +1291,14 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       const formRef = vue.ref();
       const bindForm = vue.reactive({});
       const filterParams = {};
+      const defaultPlaceholder = {
+        "el-input": "\u8BF7\u8F93\u5165",
+        "el-input-number": "\u8BF7\u8F93\u5165",
+        "el-select": "\u8BF7\u9009\u62E9",
+        "el-date-picker": "\u8BF7\u9009\u62E9",
+        "el-time-picker": "\u8BF7\u9009\u62E9",
+        "el-cascader": "\u8BF7\u9009\u62E9"
+      };
       const handleDefaultValue = (filterItem) => {
         const defaultMap = {
           component: "el-input",
@@ -1301,7 +1309,12 @@ var jlcAdmin = function(exports, vue, elementPlus) {
           flatTransform: true,
           enterQuery: true
         };
-        return merge_1({}, defaultMap, filterItem);
+        const result = merge_1({}, defaultMap, filterItem);
+        if (result.component === "el-input") {
+          result.trim = isEmpty(result.trim) ? true : result.trim;
+        }
+        result.attrs.placeholder = result.attrs.placeholder || defaultPlaceholder[result.component];
+        return result;
       };
       const handleRangeTime = (filterItem) => {
         const { label, key, type, value = [], transform } = filterItem;
@@ -1390,6 +1403,11 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       const query = (queryNow = true) => {
         const transformValues = syncFilterParams();
         emit("query", transformValues, queryNow);
+        return transformValues;
+      };
+      const setFilter = (filter, queryNow = true) => {
+        Object.assign(bindForm, filter);
+        return query(queryNow);
       };
       const reset = (queryNow = true) => {
         handleInitValue();
@@ -1437,6 +1455,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       expose({
         query,
         reset,
+        setFilter,
         epForm: formRef
       });
       return (_ctx, _cache) => {
@@ -1475,7 +1494,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
                   }), vue.createSlots({
                     default: vue.withCtx(() => [
                       item.children ? (vue.openBlock(true), vue.createElementBlock(vue.Fragment, { key: 0 }, vue.renderList(item.children, (child, index22) => {
-                        return vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(child.component), vue.mergeProps({ key: index22 }, child.attrs, vue.toHandlers(child.events)), {
+                        return vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(child.component), vue.mergeProps({ key: index22 }, child.attrs || {}, vue.toHandlers(child.events || {})), {
                           default: vue.withCtx(() => [
                             child.render ? (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(child.render(bindForm)), { key: 0 })) : child.content ? (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 1 }, [
                               vue.createTextVNode(vue.toDisplayString(child.content), 1)
@@ -1501,53 +1520,39 @@ var jlcAdmin = function(exports, vue, elementPlus) {
                 _: 2
               }, 1032, ["prop", "label", "style"]);
             }), 128)),
-            vue.createElementVNode("div", _hoisted_3$1, [
-              vue.createVNode(_component_el_button, {
-                type: "primary",
-                onClick: _cache[0] || (_cache[0] = ($event) => query(true))
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createTextVNode("\u67E5\u8BE2")
-                ]),
-                _: 1
-              }),
-              vue.createVNode(_component_el_button, {
-                type: "info",
-                onClick: _cache[1] || (_cache[1] = ($event) => reset(true))
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createTextVNode("\u91CD\u7F6E")
-                ]),
-                _: 1
-              })
-            ])
+            vue.renderSlot(_ctx.$slots, "filter-ctrl", {
+              query: (queryNow = true) => query(queryNow),
+              reset: (queryNow = true) => reset(queryNow)
+            }, () => [
+              vue.createElementVNode("div", _hoisted_3$1, [
+                vue.createVNode(_component_el_button, {
+                  type: "primary",
+                  onClick: _cache[0] || (_cache[0] = ($event) => query(true))
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode("\u67E5\u8BE2")
+                  ]),
+                  _: 1
+                }),
+                vue.createVNode(_component_el_button, {
+                  type: "info",
+                  onClick: _cache[1] || (_cache[1] = ($event) => reset(true))
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode("\u91CD\u7F6E")
+                  ]),
+                  _: 1
+                })
+              ])
+            ], true)
           ]),
           _: 3
         }, 16, ["model"]);
       };
     }
   });
-  const filter_vue_vue_type_style_index_0_scoped_3043d690_lang = "";
-  const Filter = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-3043d690"]]);
-  const getEpTableCommonFns = (target) => {
-    return {
-      clearSelection: target.clearSelection,
-      getSelectionRows: target.getSelectionRows,
-      toggleRowSelection: target.toggleRowSelection,
-      toggleAllSelection: target.toggleAllSelection,
-      toggleRowExpansion: target.toggleRowExpansion,
-      setCurrentRow: target.setCurrentRow
-    };
-  };
-  const epTableCommonEventNames = [
-    "select",
-    "select-all",
-    "selection-change",
-    "row-click",
-    "row-dblclick",
-    "sort-change",
-    "current-change"
-  ];
+  const filter_vue_vue_type_style_index_0_scoped_91c5ff49_lang = "";
+  const Filter = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-91c5ff49"]]);
   const propsType$2 = {
     columns: {
       type: Array,
@@ -1576,7 +1581,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     "update",
     "delete"
   ];
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-db96baa7"), n = n(), vue.popScopeId(), n);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-4a11fadd"), n = n(), vue.popScopeId(), n);
   const _hoisted_1 = {
     key: 0,
     class: "table__state"
@@ -1683,7 +1688,6 @@ var jlcAdmin = function(exports, vue, elementPlus) {
         return result;
       });
       const exoprtFns = {
-        epTable: tableRef,
         clearSelection: () => {
         },
         getSelectionRows: () => {
@@ -1695,10 +1699,26 @@ var jlcAdmin = function(exports, vue, elementPlus) {
         toggleRowExpansion: () => {
         },
         setCurrentRow: () => {
+        },
+        clearSort: () => {
+        },
+        clearFilter: () => {
+        },
+        doLayout: () => {
+        },
+        sort: () => {
+        },
+        scrollTo: () => {
+        },
+        setScrollTop: () => {
+        },
+        setScrollLeft: () => {
         }
       };
       vue.onMounted(() => {
-        Object.assign(exoprtFns, getEpTableCommonFns(tableRef.value));
+        Object.keys(exoprtFns).forEach((key) => {
+          exoprtFns[key] = tableRef.value[key];
+        });
       });
       expose(exoprtFns);
       return (_ctx, _cache) => {
@@ -1749,8 +1769,8 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       };
     }
   });
-  const table_vue_vue_type_style_index_0_scoped_db96baa7_lang = "";
-  const Table = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-db96baa7"]]);
+  const table_vue_vue_type_style_index_0_scoped_4a11fadd_lang = "";
+  const Table = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-4a11fadd"]]);
   const DEFAULT_PAGE_SIZE = 15;
   const propsType$1 = {
     total: {
@@ -1786,14 +1806,16 @@ var jlcAdmin = function(exports, vue, elementPlus) {
         query();
       };
       const query = (queryNow = true) => {
-        emit(
-          "query",
-          {
-            pageNum: pageInfo.pageNum,
-            pageSize: pageInfo.pageSize
-          },
-          queryNow
-        );
+        const _pageInfo = {
+          pageNum: pageInfo.pageNum,
+          pageSize: pageInfo.pageSize
+        };
+        emit("query", _pageInfo, queryNow);
+        return _pageInfo;
+      };
+      const setPage = (_pageInfo, queryNow = true) => {
+        Object.assign(pageInfo, _pageInfo);
+        return query(queryNow);
       };
       const reset = (queryNow = true, resetSize = false) => {
         pageInfo.pageNum = initPageInfo.pageNum;
@@ -1803,6 +1825,8 @@ var jlcAdmin = function(exports, vue, elementPlus) {
         query(queryNow);
       };
       expose({
+        query,
+        setPage,
         reset
       });
       return (_ctx, _cache) => {
@@ -1845,34 +1869,46 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     });
     const onFilterQuery = (params2, queryNow) => {
       filterParams.value = params2 || {};
-      queryNow && query();
+      queryNow && queryData();
     };
     const onFilterReset = (params2, queryNow) => {
       filterParams.value = params2 || {};
       if (pageRef.value) {
         pageRef.value.reset(false);
       }
-      queryNow && query();
+      queryNow && queryData();
     };
     const onPageQuery = (params2, queryNow) => {
       pageParams.value = params2 || {};
-      queryNow && query();
+      queryNow && queryData();
+    };
+    const setFilter = (filter, queryNow = true) => {
+      if (filterRef.value) {
+        return filterRef.value.setFilter(filter, queryNow);
+      }
     };
     const resetFilter = (queryNow = true) => {
-      filterRef.value.reset(queryNow);
+      if (filterRef.value) {
+        filterRef.value.reset(queryNow);
+      }
     };
-    const resetPage = (queryNow = true) => {
+    const setPage = (pageInfo, queryNow = true) => {
       if (pageRef.value) {
-        pageRef.value.reset(queryNow);
+        pageRef.value.setPage(pageInfo, queryNow);
+      }
+    };
+    const resetPage = (queryNow = true, resetSize = false) => {
+      if (pageRef.value) {
+        pageRef.value.reset(queryNow, resetSize);
       }
     };
     const refresh = (needResetPage = false) => {
       if (needResetPage) {
         resetPage(false);
       }
-      query();
+      queryData();
     };
-    const query = () => {
+    const queryData = () => {
       if (!props.getData)
         return;
       const retValue = props.getData(queryParams.value);
@@ -1902,7 +1938,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
         queryTaskCount--;
       });
     };
-    const handleQueryData = (queryData) => {
+    const handleQueryData = (queryData2) => {
       const throwErr = () => {
         const errMsg = `
       [jlc-table] getData\u63A5\u6536\u5230\u7684\u6570\u636E\u7ED3\u6784\u6709\u8BEF\uFF0C\u8981\u6C42\u5982\u4E0B\uFF1A
@@ -1914,21 +1950,26 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       `;
         throw new Error(errMsg);
       };
-      if (typeof queryData !== "object" || typeof queryData.total !== "number" || !Array.isArray(queryData.list)) {
+      if (typeof queryData2 !== "object" || typeof queryData2.total !== "number" || !Array.isArray(queryData2.list)) {
         throwErr();
       }
-      data.value = queryData.list;
-      total.value = queryData.total || 0;
+      data.value = queryData2.list;
+      total.value = queryData2.total || 0;
       error.value = false;
-      emit("got-data", queryData);
+      emit("got-data", queryData2);
+    };
+    const query = () => {
+      if (filterRef.value) {
+        filterRef.value.query(false);
+      }
+      if (pageRef.value) {
+        pageRef.value.query(false);
+      }
+      queryData();
     };
     if (props.initGet) {
       vue.onMounted(() => {
-        if (filterRef.value) {
-          filterRef.value.query();
-        } else {
-          query();
-        }
+        query();
       });
     }
     return {
@@ -1941,10 +1982,13 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       onFilterQuery,
       onFilterReset,
       onPageQuery,
-      refresh,
-      resetFilter,
-      resetPage,
       query,
+      refresh,
+      setFilter,
+      resetFilter,
+      setPage,
+      resetPage,
+      queryData,
       handleQuery,
       handleQueryData
     };
@@ -1961,6 +2005,25 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     }).map((item) => item.slot);
     return result;
   };
+  const getEpTableCommonFns = (target) => {
+    return {
+      clearSelection: target.clearSelection,
+      getSelectionRows: target.getSelectionRows,
+      toggleRowSelection: target.toggleRowSelection,
+      toggleAllSelection: target.toggleAllSelection,
+      toggleRowExpansion: target.toggleRowExpansion,
+      setCurrentRow: target.setCurrentRow
+    };
+  };
+  const epTableCommonEventNames = [
+    "select",
+    "select-all",
+    "selection-change",
+    "row-click",
+    "row-dblclick",
+    "sort-change",
+    "current-change"
+  ];
   const propsType = {
     filters: propsType$3.filters,
     columns: propsType$2.columns,
@@ -2037,8 +2100,11 @@ var jlcAdmin = function(exports, vue, elementPlus) {
         loading,
         error,
         query,
+        queryData,
         refresh,
+        setFilter,
         resetFilter,
+        setPage,
         resetPage,
         onFilterQuery,
         onFilterReset,
@@ -2047,13 +2113,16 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       const tableRef = vue.ref();
       const onTableQuery = (params, queryNow) => {
         tableParams.value = params || {};
-        queryNow && query();
+        queryNow && queryData();
       };
       const filterSlots = vue.computed(() => getOptionSlots(props.filters));
       const tableSlots = vue.computed(() => getOptionSlots(props.columns));
       const exoprtFns = {
+        query,
         refresh,
+        setFilter,
         resetFilter,
+        setPage,
         resetPage,
         filter: filterRef,
         table: tableRef,
@@ -2120,7 +2189,12 @@ var jlcAdmin = function(exports, vue, elementPlus) {
                 filters: _ctx.filters,
                 onQuery: vue.unref(onFilterQuery),
                 onReset: vue.unref(onFilterReset)
-              }), vue.createSlots({ _: 2 }, [
+              }), vue.createSlots({
+                "filter-ctrl": vue.withCtx((slotScope) => [
+                  vue.renderSlot(_ctx.$slots, "filter-ctrl", vue.normalizeProps(vue.guardReactiveProps(slotScope)))
+                ]),
+                _: 2
+              }, [
                 vue.renderList(vue.unref(filterSlots), (slot) => {
                   return {
                     name: slot,

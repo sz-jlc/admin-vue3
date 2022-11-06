@@ -1,6 +1,5 @@
 import { propsType as filterProps } from '@/components/filter/src/filter'
 import { propsType as tableProps } from '@/components/table/src/table'
-import { propsType as pageProps } from '@/components/page/src/page'
 import { epTableCommonEventNames } from '@/utils/ep-table-common'
 import type { PropType } from 'vue'
 import type { Data } from '@/types'
@@ -25,34 +24,37 @@ export const propsType = {
     default: true
   },
   filterProps: {
-    type: Object as PropType<Partial<typeof filterProps>>,
+    type: Object,
     default: () => ({})
   },
   filterEvents: {
-    type: Object as PropType<VueEvents>,
+    type: Object,
     default: () => ({})
   },
   tableProps: {
-    type: Object as PropType<Partial<typeof tableProps>>,
+    type: Object,
     default: () => ({})
   },
   tableEvents: {
-    type: Object as PropType<VueEvents>,
+    type: Object,
     default: () => ({})
   },
   pageProps: {
-    type: Object as PropType<Partial<typeof pageProps>>,
+    type: Object,
     default: () => ({})
   },
   pageEvents: {
-    type: Object as PropType<VueEvents>,
+    type: Object,
     default: () => ({})
   },
 }
 
 export interface ExoprtFns {
+  query: Function
   refresh: Function
+  setFilter: Function
   resetFilter: Function
+  setPage: Function
   resetPage: Function
   filter: any
   table: any

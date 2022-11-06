@@ -12,6 +12,9 @@
         <template v-for="slot in filterSlots" #[slot]="{ bindForm }">
           <slot :name="slot" :bind-form="bindForm" />
         </template>
+        <template #filter-ctrl="slotScope">
+          <slot name="filter-ctrl" v-bind="slotScope"></slot>
+        </template>
       </jlc-filter>
     </template>
     <template #filter-bottom>
@@ -91,8 +94,11 @@
     loading,
     error,
     query,
+    queryData,
     refresh,
+    setFilter,
     resetFilter,
+    setPage,
     resetPage,
     onFilterQuery,
     onFilterReset,
@@ -103,15 +109,18 @@
 
   const onTableQuery = (params: any, queryNow: boolean) => {
     tableParams.value = params || {}
-    queryNow && query()
+    queryNow && queryData()
   }
 
   const filterSlots = computed(() => getOptionSlots(props.filters as any[]))
   const tableSlots = computed(() => getOptionSlots(props.columns as any[]))
 
   const exoprtFns: ExoprtFns & EpTableCommonFns = {
+    query,
     refresh,
+    setFilter,
     resetFilter,
+    setPage,
     resetPage,
     filter: filterRef,
     table: tableRef,

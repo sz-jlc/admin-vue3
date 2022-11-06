@@ -26,13 +26,4 @@ export interface EpTableCommonEvents {
     (e: 'current-change'): void;
 }
 export declare const epTableCommonEventNames: string[];
-export declare const getEpTableCommonEvents: (target: any) => {
-    select: any;
-    selectAll: any;
-    selectionChange: any;
-    rowClick: any;
-    rowDblclick: any;
-    sortChange: any;
-    currentChange: any;
-};
 export {};

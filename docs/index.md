@@ -1,6 +1,8 @@
 ---
 layout: home
 
+title: 首页
+
 hero:
   name: JlcAdmin
   text: 嘉立创管理端组件库Vue3
@@ -16,16 +18,16 @@ hero:
     src: /assets/svg/Illustration.svg
     alt: JlcAdmin
 features:
+  - icon: 🙂
+    title: Filter
+    details: 筛选表单
   - icon: 😎
     title: ProTable
     details: 筛选分页表格
   - icon: 🤗
     title: TreeTransfer
     details: 树形穿梭框
-  - icon: 😊
-    title: AoeDialog
-    details: 新增或编辑弹窗
-  - icon: 🤪
+  - icon: 🤔
     title: 其他组件
-    details: 还有很多组件等你来用哦
+    details: 组件库持续建设中，欢迎加入
 ---

@@ -5,7 +5,7 @@ export default defineConfig({
     logo: '/assets/svg/jlc-logo.svg',
     nav: [
       { text: '指南', link: '/guide/index' },
-      { text: '组件', link: '/component/index' },
+      { text: '组件', link: '/component/filter/index.html' },
       { text: '贡献', link: '/contribution/index' },
       { text: 'Github', link: 'https://github.com/sz-jlc/admin-vue3' }
     ],
@@ -14,14 +14,14 @@ export default defineConfig({
         {
           text: '组件列表',
           items: [
-            { text: 'Filter', link: '/introduction' },
-            { text: 'Table', link: '/getting-started' },
-            { text: 'Page', link: '/getting-started' },
-            { text: 'ProTable', link: '/getting-started' },
-            { text: 'ProList', link: '/getting-started' },
-            { text: 'TreeTransfer', link: '/getting-started' },
-            { text: 'AoeDialog', link: '/getting-started' },
-            { text: 'AoeDrawer', link: '/getting-started' },
+            { text: 'Filter', link: '/component/filter/index.html' },
+            { text: 'Table', link: '/component/table/index.html' },
+            { text: 'Page', link: '/component/page/index.html' },
+            { text: 'ProTable', link: '/component/pro-table/index.html' },
+            // { text: 'ProList', link: '/component/pro-list/index.html' },
+            { text: 'TreeTransfer', link: '/component/tree-transfer/index.html' },
+            // { text: 'AoeDialog', link: '/component/aoe-dialog/index.html' },
+            // { text: 'AoeDrawer', link: '/component/aoe-drawer/index.html' },
           ]
         }
       ],
@@ -46,8 +46,13 @@ export default defineConfig({
     footer: {
       message: '深圳嘉立创前端团队',
     },
-    
+    outlineTitle: '目录',
+    outline: 'deep',
   },
   title: '嘉立创管理端组件库',
-  description: '嘉立创管理端组件，Vue3、ElementPlus'
+  description: '嘉立创管理端组件，Vue3、ElementPlus',
+  lang: 'zh_CN',
+  ignoreDeadLinks: true,
+  lastUpdated: true,
+  cleanUrls: 'with-subfolders',
 })

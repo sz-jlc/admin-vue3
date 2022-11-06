@@ -1,10 +1,13 @@
+# 指南
+嘉立创管理端组件库使用指南
+
 ## 安装
 ```
 npm install @sz-jlc/admin-vue3
 ```
 
 ::: tip
-当前组件库基于element-plus进行二次封装，所以安装之前确保安装了vue3以及element-plus依赖
+当前组件库基于element-plus进行二次封装，所以安装之前确保安装了vue3以及element-plus
 :::
 
 ## 全局注册
@@ -42,4 +45,6 @@ import '@sz-jlc/admin-vue3/dist/style.css'
 ```
 ::: warning
 当前组件库暂无CDN链接，请自行下载npm包进行标签引入
+
+同时还需要存在全局变量：Vue、ElementPlus
 :::

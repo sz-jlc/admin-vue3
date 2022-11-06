@@ -1,5 +1,4 @@
 import { h } from 'vue';
-import type { ExoprtFns } from './table';
 import type { AnyObj } from '../../../types';
 declare const _sfc_main: import("vue").DefineComponent<{
     columns: {
@@ -49,7 +48,21 @@ declare const _sfc_main: import("vue").DefineComponent<{
         render(h: any, row: AnyObj): any;
     } | undefined;
     handledColumns: import("vue").ComputedRef<any[]>;
-    exoprtFns: ExoprtFns;
+    exoprtFns: {
+        clearSelection: () => void;
+        getSelectionRows: () => void;
+        toggleRowSelection: () => void;
+        toggleAllSelection: () => void;
+        toggleRowExpansion: () => void;
+        setCurrentRow: () => void;
+        clearSort: () => void;
+        clearFilter: () => void;
+        doLayout: () => void;
+        sort: () => void;
+        scrollTo: () => void;
+        setScrollTop: () => void;
+        setScrollLeft: () => void;
+    };
     h: typeof h;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, string[], string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     columns: {

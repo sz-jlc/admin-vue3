@@ -42,14 +42,17 @@
   }
 
   const query = (queryNow = true) => {
-    emit(
-      'query',
-      {
-        pageNum: pageInfo.pageNum,
-        pageSize: pageInfo.pageSize,
-      },
-      queryNow
-    )
+    const _pageInfo = {
+      pageNum: pageInfo.pageNum,
+      pageSize: pageInfo.pageSize,
+    }
+    emit('query', _pageInfo, queryNow)
+    return _pageInfo
+  }
+
+  const setPage = (_pageInfo: object, queryNow = true) => {
+    Object.assign(pageInfo, _pageInfo)
+    return query(queryNow)
   }
 
   const reset = (queryNow = true, resetSize = false) => {
@@ -61,6 +64,8 @@
   }
 
   defineExpose({
+    query,
+    setPage,
     reset,
   })
 </script>

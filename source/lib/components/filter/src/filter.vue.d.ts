@@ -16,15 +16,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
     formRef: import("vue").Ref<any>;
     bindForm: AnyObj;
     filterParams: AnyObj;
-    handleDefaultValue: (filterItem: FilterItem) => {
-        component: string;
-        attrs: {
-            clearable: boolean;
-        };
-        events: {};
-        flatTransform: boolean;
-        enterQuery: boolean;
-    } & FilterItem;
+    defaultPlaceholder: any;
+    handleDefaultValue: (filterItem: FilterItem) => any;
     handleRangeTime: (filterItem: FilterItem) => FilterItem | {
         label: string | undefined;
         transform: ((value: any) => any) | undefined;
@@ -50,7 +43,12 @@ declare const _sfc_main: import("vue").DefineComponent<{
         [key: string]: any;
     };
     handleInitValue: () => void;
-    query: (queryNow?: boolean) => void;
+    query: (queryNow?: boolean) => {
+        [key: string]: any;
+    };
+    setFilter: (filter: object, queryNow?: boolean) => {
+        [key: string]: any;
+    };
     reset: (queryNow?: boolean) => void;
     onEnter: (filterItem: FilterItem) => void;
     filterItemStyle: import("vue").ComputedRef<{

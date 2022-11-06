@@ -1,0 +1,125 @@
+
+.base-table {
+  width: 100%;
+  display: block;
+  font-size: 14px;
+  border-color: #eee;
+  word-break: break-all;
+}
+
+.base-table thead,
+.base-table tbody {
+  display: block;
+}
+
+.base-table td {
+  background: var(--vp-c-bg);
+}
+
+.base-table th {
+  font-size: 14px;
+  text-align: left;
+}
+
+.base-table tr {
+  display: flex;
+  border: none;
+}
+
+.base-table th,
+.base-table td {
+  border: none;
+  box-sizing: border-box;
+  padding: 10px 8px;
+  border-color: var(--vp-c-divider-light);
+}
+
+.base-table th,
+.base-table td {
+  /* border-left: 1px solid var(--vp-c-divider-light);
+  border-top: 1px solid var(--vp-c-divider-light); */
+  border-bottom: 1px solid var(--vp-c-divider-light);
+}
+
+/* .props-table th:last-child,
+.props-table td:last-child {
+  border-right: 1px solid var(--vp-c-divider-light);
+}
+
+.props-table tr:not(:first-child):last-child {
+  border-bottom: 1px solid var(--vp-c-divider-light);
+} */
+
+.props-table th:nth-child(1),
+.props-table td:nth-child(1) {
+  flex: 0 0 150px;
+}
+
+.props-table th:nth-child(2),
+.props-table td:nth-child(2) {
+  flex: 1;
+}
+
+.props-table th:nth-child(3),
+.props-table td:nth-child(3) {
+  flex: 0 0 150px;
+}
+
+.props-table th:nth-child(4),
+.props-table td:nth-child(4) {
+  flex: 0 0 120px;
+}
+
+.props-table th:nth-child(5),
+.props-table td:nth-child(5) {
+  flex: 0 0 100px;
+}
+
+.props-table th:nth-child(6),
+.props-table td:nth-child(6) {
+  flex: 0 0 80px;
+  text-align: center;
+}
+
+
+.events-table th:nth-child(1),
+.events-table td:nth-child(1) {
+  flex: 0 0 150px;
+}
+
+.events-table th:nth-child(2),
+.events-table td:nth-child(2) {
+  flex: 1;
+}
+
+.events-table th:nth-child(3),
+.events-table td:nth-child(3) {
+  flex: 0 0 240px;
+}
+
+
+.methods-table th:nth-child(1),
+.methods-table td:nth-child(1) {
+  flex: 0 0 150px;
+}
+
+.methods-table th:nth-child(2),
+.methods-table td:nth-child(2) {
+  flex: 1;
+}
+
+.methods-table th:nth-child(3),
+.methods-table td:nth-child(3) {
+  flex: 0 0 240px;
+}
+
+
+.slots-table th:nth-child(1),
+.slots-table td:nth-child(1) {
+  flex: 0 0 150px;
+}
+
+.slots-table th:nth-child(2),
+.slots-table td:nth-child(2) {
+  flex: 1;
+}

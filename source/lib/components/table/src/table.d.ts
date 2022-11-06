@@ -1,8 +1,7 @@
-import type { PropType, Ref } from 'vue';
+import type { PropType } from 'vue';
 import type { VNode } from 'vue';
 import type { AnyObj } from '../../../types';
 import type { ElTableColumn } from 'element-plus';
-import type { EpTableCommonFns } from '../../../utils/ep-table-common';
 declare type ElTableColumnProps = InstanceType<typeof ElTableColumn>['$props'];
 export interface Column extends ElTableColumnProps {
     type?: string;
@@ -33,8 +32,5 @@ export declare const propsType: {
         default: boolean;
     };
 };
-export interface ExoprtFns extends EpTableCommonFns {
-    epTable: Ref;
-}
 export declare const emitsType: string[];
 export {};

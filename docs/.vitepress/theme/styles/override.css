@@ -1,0 +1,56 @@
+@media (min-width: 960px) {
+  .content[data-v-7f604b9c] {
+    padding: 0 0 128px;
+  }
+}
+
+.VPDoc.has-aside .content-container {
+  min-width: 100%;
+}
+
+.VPSidebarGroup {
+  padding: 20px 0;
+}
+
+.VPSidebarGroup .VPLink {
+  padding: 5px 10px!important;
+  border-radius: 6px;
+}
+
+.VPSidebarGroup .VPLink.active {
+  /* color: #fff; */
+  background-color: var(--vp-c-green-dimm-3);
+}
+
+.el-table table {
+  margin: 0;
+  display: table;
+  border-collapse: separate;
+  overflow-x: visible;
+}
+
+.el-table tr {
+  border-top: none;
+  transition: none;
+  background-color: var(--el-table-tr-bg-color);
+}
+
+.el-table th {
+  font-weight: 700;
+}
+
+.el-table th,
+.el-table td {
+  font-size: 14px;
+}
+
+.el-table td.el-table__cell, .el-table th.el-table__cell.is-leaf {
+  border-bottom: var(--el-table-border);
+  border-right: var(--el-table-border);
+  border-left: none;
+  border-top: none;
+}
+
+.vp-doc h2 {
+  border-top: none;
+}

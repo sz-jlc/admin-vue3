@@ -1,7 +1,4 @@
 import { DEFAULT_PAGE_SIZE } from '@/constants'
-import JlcFilter from '@/components/filter'
-import JlcPage from '@/components/page'
-
 import type { Ref } from 'vue'
 import type { Data } from '@/types'
 
@@ -15,12 +12,9 @@ interface Params {
   params: Ref
 }
 
-type FilterType = InstanceType<typeof JlcFilter>
-type PageType = InstanceType<typeof JlcPage>
-
 const useFilterPage = ({ props, emit, params }: Params) => {
-  const filterRef = ref<FilterType>()
-  const pageRef = ref<PageType>()
+  const filterRef = ref()
+  const pageRef = ref()
 
   const total = ref(0)
   const data = ref<unknown[]>([])
@@ -48,29 +42,40 @@ const useFilterPage = ({ props, emit, params }: Params) => {
 
   const onFilterQuery = (params: any, queryNow: boolean) => {
     filterParams.value = params || {}
-    queryNow && query()
+    queryNow && queryData()
   }
   const onFilterReset = (params: any, queryNow: boolean) => {
     filterParams.value = params || {}
     if (pageRef.value) {
       pageRef.value.reset(false)
     }
-    queryNow && query()
+    queryNow && queryData()
   }
-
   const onPageQuery = (params: any, queryNow: boolean) => {
     pageParams.value = params || {}
-    queryNow && query()
+    queryNow && queryData()
   }
 
+  const setFilter = (filter: object, queryNow = true) => {
+    if (filterRef.value) {
+      return filterRef.value.setFilter(filter, queryNow)
+    }
+  }
   const resetFilter = (queryNow = true) => {
-    filterRef.value!.reset(queryNow)
+    if (filterRef.value) {
+      filterRef.value.reset(queryNow)
+    }
   }
-
-  const resetPage = (queryNow = true) => {
+  const setPage = (pageInfo: object, queryNow = true) => {
     // 可能未分页，无page组件
     if (pageRef.value) {
-      pageRef.value!.reset(queryNow)
+      pageRef.value.setPage(pageInfo, queryNow)
+    }
+  }
+  const resetPage = (queryNow = true, resetSize = false) => {
+    // 可能未分页，无page组件
+    if (pageRef.value) {
+      pageRef.value!.reset(queryNow, resetSize)
     }
   }
 
@@ -78,10 +83,10 @@ const useFilterPage = ({ props, emit, params }: Params) => {
     if (needResetPage) {
       resetPage(false)
     }
-    query()
+    queryData()
   }
   
-  const query = () => {
+  const queryData = () => {
     if (!props.getData) return
     const retValue = props.getData(queryParams.value)
     if (retValue instanceof Promise) {
@@ -141,14 +146,19 @@ const useFilterPage = ({ props, emit, params }: Params) => {
     emit('got-data', queryData)
   }
 
+  const query = () => {
+    if (filterRef.value) {
+      filterRef.value.query(false)
+    }
+    if (pageRef.value) {
+      pageRef.value.query(false)
+    }
+    queryData()
+  }
+
   if (props.initGet) {
     onMounted(() => {
-      // 如果存在filter，则让filter触发query，以携带上初始的queryParams
-      if (filterRef.value) {
-        filterRef.value.query()
-      } else {
-        query()
-      }
+      query()
     })
   }
 
@@ -164,10 +174,13 @@ const useFilterPage = ({ props, emit, params }: Params) => {
     onFilterQuery,
     onFilterReset,
     onPageQuery,
-    refresh,
-    resetFilter,
-    resetPage,
     query,
+    refresh,
+    setFilter,
+    resetFilter,
+    setPage,
+    resetPage,
+    queryData,
     handleQuery,
     handleQueryData,
   }

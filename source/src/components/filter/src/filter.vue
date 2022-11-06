@@ -25,8 +25,8 @@
             :is="child.component"
             v-for="(child, index) in item.children"
             :key="index"
-            v-bind="(child.attrs as any)"
-            v-on="(child.events as any)"
+            v-bind="(child.attrs as any || {})"
+            v-on="(child.events as any || {})"
           >
             <!-- 子组件内容render -->
             <component :is="child.render(bindForm)" v-if="child.render" />
@@ -42,15 +42,20 @@
         </template>
       </component>
     </el-form-item>
-    <div class="filter__ctrl">
-      <el-button type="primary" @click="query(true)">查询</el-button>
-      <el-button type="info" @click="reset(true)">重置</el-button>
-    </div>
+    <slot name="filter-ctrl" 
+      :query="(queryNow = true) => query(queryNow)" 
+      :reset="(queryNow = true) => reset(queryNow)"
+    >
+      <div class="filter__ctrl">
+        <el-button type="primary" @click="query(true)">查询</el-button>
+        <el-button type="info" @click="reset(true)">重置</el-button>
+      </div>
+    </slot>
   </el-form>
 </template>
 
 <script setup lang="ts" name="jlc-filter">
-  import { compose } from '@/utils/tools'
+  import { compose, isEmpty } from '@/utils/tools'
   import merge from 'lodash/merge'
   import cloneDeep from 'lodash/cloneDeep'
   import { propsType, emitsType } from './filter'
@@ -66,6 +71,15 @@
   const bindForm: AnyObj = reactive({})
   const filterParams: AnyObj = {}
 
+  const defaultPlaceholder: any = {
+    'el-input': '请输入',
+    'el-input-number': '请输入',
+    'el-select': '请选择',
+    'el-date-picker': '请选择',
+    'el-time-picker': '请选择',
+    'el-cascader': '请选择',
+  }
+
   // 处理默认值
   const handleDefaultValue = (filterItem: FilterItem) => {
     const defaultMap = {
@@ -77,7 +91,13 @@
       flatTransform: true,
       enterQuery: true,
     }
-    return merge({}, defaultMap, filterItem)
+    const result: any = merge({}, defaultMap, filterItem)
+    if (result.component === 'el-input') {
+      result.trim = isEmpty(result.trim) ? true : result.trim
+    }
+    // 添加默认placeholder
+    result.attrs.placeholder = result.attrs.placeholder || defaultPlaceholder[result.component]
+    return result
   }
 
   // 处理范围时间类型的filter项
@@ -181,6 +201,13 @@
   const query = (queryNow = true) => {
     const transformValues = syncFilterParams()
     emit('query', transformValues, queryNow)
+    return transformValues
+  }
+
+  // 设置筛选表单
+  const setFilter = (filter: object, queryNow = true) => {
+    Object.assign(bindForm, filter)
+    return query(queryNow)
   }
 
   // 重置
@@ -245,6 +272,7 @@
   defineExpose({
     query,
     reset,
+    setFilter,
     epForm: formRef,
   })
 </script>
