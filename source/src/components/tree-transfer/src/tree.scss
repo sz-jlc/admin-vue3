@@ -1,0 +1,18 @@
+.transfer-tree {
+  flex: 1;
+  border: 1px solid #eee;
+  &__check-all {
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #f2f6fc;
+  }
+  &__search {
+    padding: 3px;
+    padding-bottom: 0;
+  }
+  &__main {
+    height: 500px;
+    padding: 10px;
+    overflow: auto;
+  }
+}

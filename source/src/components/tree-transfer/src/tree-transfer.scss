@@ -1,0 +1,13 @@
+.tree-transfer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__ctrl {
+    width: 100px;
+    text-align: center;
+  }
+  &__remove {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+}

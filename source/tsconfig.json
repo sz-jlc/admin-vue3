@@ -10,6 +10,7 @@
       "ESNext", 
       "DOM"
     ],
+    "types": ["element-plus/global"],
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {

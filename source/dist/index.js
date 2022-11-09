@@ -1,6 +1,6 @@
 var jlcAdmin = function(exports, vue, elementPlus) {
   "use strict";
-  const _sfc_main$4 = vue.defineComponent({
+  const _sfc_main$6 = vue.defineComponent({
     name: "filter-page-list-layout"
   });
   const filterPageList_vue_vue_type_style_index_0_scoped_59b2b166_lang = "";
@@ -11,13 +11,13 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     }
     return target;
   };
-  const _hoisted_1$2 = { class: "ftp-wrap" };
-  const _hoisted_2$2 = {
+  const _hoisted_1$4 = { class: "ftp-wrap" };
+  const _hoisted_2$4 = {
     class: "filter-wrap",
     ref: "filterWrap"
   };
-  const _hoisted_3$2 = { class: "filter-bottom" };
-  const _hoisted_4$1 = {
+  const _hoisted_3$3 = { class: "filter-bottom" };
+  const _hoisted_4$2 = {
     class: "list-wrap",
     ref: "listWrap"
   };
@@ -27,14 +27,14 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     ref: "pageWrap"
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$2, [
-      vue.createElementVNode("div", _hoisted_2$2, [
+    return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$4, [
+      vue.createElementVNode("div", _hoisted_2$4, [
         vue.renderSlot(_ctx.$slots, "filter", {}, void 0, true)
       ], 512),
-      vue.createElementVNode("div", _hoisted_3$2, [
+      vue.createElementVNode("div", _hoisted_3$3, [
         vue.renderSlot(_ctx.$slots, "filter-bottom", {}, void 0, true)
       ]),
-      vue.createElementVNode("div", _hoisted_4$1, [
+      vue.createElementVNode("div", _hoisted_4$2, [
         vue.renderSlot(_ctx.$slots, "list", {}, void 0, true)
       ], 512),
       vue.createElementVNode("div", _hoisted_5$1, [
@@ -45,7 +45,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       ], 512)
     ]);
   }
-  const FilterPageList = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render], ["__scopeId", "data-v-59b2b166"]]);
+  const FilterPageList = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render], ["__scopeId", "data-v-59b2b166"]]);
   const compose = (...fns) => {
     return fns.reduce(
       (a, b) => (...args) => a(b(...args))
@@ -53,6 +53,37 @@ var jlcAdmin = function(exports, vue, elementPlus) {
   };
   const isEmpty = (value) => {
     return value === "" || value === null || value === void 0;
+  };
+  const toTree = (list, config) => {
+    const {
+      id = "id",
+      parentId = "parentId",
+      children = "children"
+    } = config || {};
+    return list.filter((item1) => {
+      item1[children] = list.filter((item2) => item1[id] === item2[parentId]);
+      return isEmpty(item1[parentId]);
+    });
+  };
+  const flatTree = (tree, config) => {
+    const { children = "children" } = config || {};
+    const result = [];
+    function _flat(tree2) {
+      for (const item of tree2) {
+        result.push(item);
+        if (item[children]) {
+          _flat(item[children]);
+        }
+      }
+    }
+    _flat(tree);
+    return result;
+  };
+  const convertArrayMap = (arr, key) => {
+    return arr.reduce((res, cur) => {
+      res[cur[key]] = cur;
+      return res;
+    }, {});
   };
   var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
   function listCacheClear$1() {
@@ -1261,7 +1292,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
   }
   var cloneDeep_1 = cloneDeep;
-  const propsType$3 = {
+  const propsType$4 = {
     filters: {
       type: Array,
       default: () => [],
@@ -1276,15 +1307,15 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     "query",
     "reset"
   ];
-  const _hoisted_1$1 = { class: "el-date-table-cell" };
-  const _hoisted_2$1 = { class: "el-date-table-cell__text" };
-  const _hoisted_3$1 = { class: "filter__ctrl" };
-  const __default__$3 = vue.defineComponent({
+  const _hoisted_1$3 = { class: "el-date-table-cell" };
+  const _hoisted_2$3 = { class: "el-date-table-cell__text" };
+  const _hoisted_3$2 = { class: "filter__ctrl" };
+  const __default__$4 = vue.defineComponent({
     name: "jlc-filter"
   });
-  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$3,
-    props: propsType$3,
+  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$4,
+    props: propsType$4,
     emits: emitsType$3,
     setup(__props, { expose, emit }) {
       const props = __props;
@@ -1509,8 +1540,8 @@ var jlcAdmin = function(exports, vue, elementPlus) {
                     item.component === "el-date-picker" ? {
                       name: "default",
                       fn: vue.withCtx(({ text }) => [
-                        vue.createElementVNode("div", _hoisted_1$1, [
-                          vue.createElementVNode("span", _hoisted_2$1, vue.toDisplayString(text), 1)
+                        vue.createElementVNode("div", _hoisted_1$3, [
+                          vue.createElementVNode("span", _hoisted_2$3, vue.toDisplayString(text), 1)
                         ])
                       ]),
                       key: "0"
@@ -1524,7 +1555,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
               query: (queryNow = true) => query(queryNow),
               reset: (queryNow = true) => reset(queryNow)
             }, () => [
-              vue.createElementVNode("div", _hoisted_3$1, [
+              vue.createElementVNode("div", _hoisted_3$2, [
                 vue.createVNode(_component_el_button, {
                   type: "primary",
                   onClick: _cache[0] || (_cache[0] = ($event) => query(true))
@@ -1552,8 +1583,8 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     }
   });
   const filter_vue_vue_type_style_index_0_scoped_91c5ff49_lang = "";
-  const Filter = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-91c5ff49"]]);
-  const propsType$2 = {
+  const Filter = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-91c5ff49"]]);
+  const propsType$3 = {
     columns: {
       type: Array,
       default: () => [],
@@ -1582,15 +1613,15 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     "delete"
   ];
   const _withScopeId = (n) => (vue.pushScopeId("data-v-4a11fadd"), n = n(), vue.popScopeId(), n);
-  const _hoisted_1 = {
+  const _hoisted_1$2 = {
     key: 0,
     class: "table__state"
   };
-  const _hoisted_2 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("div", null, "\u65E0\u6570\u636E", -1));
-  const _hoisted_3 = [
-    _hoisted_2
+  const _hoisted_2$2 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("div", null, "\u65E0\u6570\u636E", -1));
+  const _hoisted_3$1 = [
+    _hoisted_2$2
   ];
-  const _hoisted_4 = {
+  const _hoisted_4$1 = {
     key: 1,
     class: "table__state"
   };
@@ -1598,12 +1629,12 @@ var jlcAdmin = function(exports, vue, elementPlus) {
   const _hoisted_6 = [
     _hoisted_5
   ];
-  const __default__$2 = vue.defineComponent({
+  const __default__$3 = vue.defineComponent({
     name: "jlc-table"
   });
-  const _sfc_main$2 = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$2,
-    props: propsType$2,
+  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$3,
+    props: propsType$3,
     emits: emitsType$2,
     setup(__props, { expose, emit }) {
       const props = __props;
@@ -1734,7 +1765,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
         }), {
           empty: vue.withCtx(() => [
             vue.withDirectives(vue.createElementVNode("div", null, [
-              !_ctx.error ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_1, _hoisted_3)) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_4, _hoisted_6))
+              !_ctx.error ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_1$2, _hoisted_3$1)) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_4$1, _hoisted_6))
             ], 512), [
               [vue.vShow, !_ctx.loading]
             ])
@@ -1770,9 +1801,9 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     }
   });
   const table_vue_vue_type_style_index_0_scoped_4a11fadd_lang = "";
-  const Table = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-4a11fadd"]]);
+  const Table = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-4a11fadd"]]);
   const DEFAULT_PAGE_SIZE = 15;
-  const propsType$1 = {
+  const propsType$2 = {
     total: {
       type: Number,
       required: true
@@ -1781,12 +1812,12 @@ var jlcAdmin = function(exports, vue, elementPlus) {
   const emitsType$1 = [
     "query"
   ];
-  const __default__$1 = vue.defineComponent({
+  const __default__$2 = vue.defineComponent({
     name: "jlc-page"
   });
-  const _sfc_main$1 = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$1,
-    props: propsType$1,
+  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$2,
+    props: propsType$2,
     emits: emitsType$1,
     setup(__props, { expose, emit }) {
       const props = __props;
@@ -2024,9 +2055,9 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     "sort-change",
     "current-change"
   ];
-  const propsType = {
-    filters: propsType$3.filters,
-    columns: propsType$2.columns,
+  const propsType$1 = {
+    filters: propsType$4.filters,
+    columns: propsType$3.columns,
     getData: {
       type: Function,
       required: true
@@ -2069,12 +2100,12 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     "got-data",
     ...epTableCommonEventNames
   ];
-  const __default__ = vue.defineComponent({
+  const __default__$1 = vue.defineComponent({
     name: "jlc-pro-table"
   });
-  const _sfc_main = /* @__PURE__ */ vue.defineComponent({
-    ...__default__,
-    props: propsType,
+  const _sfc_main$2 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$1,
+    props: propsType$1,
     emits: emitsType,
     setup(__props, { expose, emit }) {
       const props = __props;
@@ -2210,7 +2241,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
           _ctx.isPage ? {
             name: "page",
             fn: vue.withCtx(() => [
-              vue.createVNode(vue.unref(_sfc_main$1), vue.mergeProps({
+              vue.createVNode(vue.unref(_sfc_main$3), vue.mergeProps({
                 ref_key: "pageRef",
                 ref: pageRef
               }, _ctx.pageProps, vue.toHandlers(_ctx.pageEvents), {
@@ -2224,12 +2255,332 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       };
     }
   });
+  const SOURCE_TYPE = 1;
+  const TARGET_TYPE = 2;
+  const COMMON_TYPE = 3;
+  const _hoisted_1$1 = { class: "transfer-tree" };
+  const _hoisted_2$1 = { class: "transfer-tree__check-all" };
+  const _hoisted_3 = { class: "transfer-tree__search" };
+  const _hoisted_4 = { class: "transfer-tree__main" };
+  const _sfc_main$1 = /* @__PURE__ */ vue.defineComponent({
+    __name: "tree",
+    props: {
+      props: { default: () => ({}) },
+      type: null,
+      list: null,
+      title: null
+    },
+    setup(__props, { expose }) {
+      const compProps = __props;
+      vue.watch(
+        () => compProps.list,
+        async () => {
+          await vue.nextTick();
+          updateCheckAll();
+        },
+        {
+          deep: true
+        }
+      );
+      const treeRef = vue.ref();
+      const labelKey = vue.computed(() => compProps.props.label || "label");
+      const treeData = vue.computed(() => {
+        const { type, list, props } = compProps;
+        const { id, parentId, children } = props;
+        return toTree(
+          cloneDeep_1(
+            list.filter((item) => {
+              const { __type__ } = item;
+              return __type__ === type || __type__ == COMMON_TYPE;
+            })
+          ),
+          {
+            id,
+            parentId,
+            children
+          }
+        );
+      });
+      const listIdMap = vue.computed(
+        () => convertArrayMap(
+          compProps.list.filter((item) => {
+            const { __type__ } = item;
+            return __type__ === compProps.type || __type__ == COMMON_TYPE;
+          }),
+          compProps.props.id || "id"
+        )
+      );
+      const ids = vue.computed(() => Object.keys(listIdMap.value));
+      const getNodes = () => {
+        const { type, list } = compProps;
+        return list.filter((item) => item.__type__ === type || item.__type__ === COMMON_TYPE);
+      };
+      const filterKey = vue.ref("");
+      vue.watch(filterKey, (value) => {
+        treeRef.value.filter(value);
+      });
+      const findParents = (data) => {
+        const result = [data];
+        for (let i = 0; i < result.length; i++) {
+          const item = result[i];
+          const parent = listIdMap.value[item.parentId];
+          if (parent) {
+            result.push(parent);
+          }
+        }
+        result.shift();
+        return result;
+      };
+      const filterNode = (value, data) => {
+        if (!value)
+          return true;
+        const transformValue = value.toUpperCase();
+        if (data[labelKey.value].toUpperCase().includes(transformValue)) {
+          return true;
+        }
+        const parents = findParents(data);
+        if (parents.some((item) => item[labelKey.value].toUpperCase().includes(transformValue))) {
+          return true;
+        }
+        return false;
+      };
+      const checkedAll = vue.ref(false);
+      const indeterminate = vue.ref(false);
+      const onChangeCheckAll = (value) => {
+        treeRef.value.setCheckedKeys(value ? ids.value : []);
+      };
+      const updateCheckAll = () => {
+        const checkedCount = treeRef.value.getCheckedNodes().length;
+        if (checkedCount === 0) {
+          indeterminate.value = false;
+          checkedAll.value = false;
+          return;
+        }
+        if (checkedCount === 0) {
+          indeterminate.value = false;
+          checkedAll.value = false;
+        } else if (checkedCount === ids.value.length) {
+          indeterminate.value = false;
+          checkedAll.value = true;
+        } else {
+          checkedAll.value = false;
+          indeterminate.value = true;
+        }
+      };
+      expose({
+        tree: treeRef,
+        getNodes
+      });
+      return (_ctx, _cache) => {
+        const _component_el_checkbox = vue.resolveComponent("el-checkbox");
+        const _component_el_input = vue.resolveComponent("el-input");
+        const _component_el_tree = vue.resolveComponent("el-tree");
+        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$1, [
+          vue.createElementVNode("div", _hoisted_2$1, [
+            vue.createVNode(_component_el_checkbox, {
+              modelValue: checkedAll.value,
+              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => checkedAll.value = $event),
+              indeterminate: indeterminate.value,
+              label: __props.title,
+              onChange: onChangeCheckAll
+            }, null, 8, ["modelValue", "indeterminate", "label"])
+          ]),
+          vue.createElementVNode("div", _hoisted_3, [
+            vue.createVNode(_component_el_input, {
+              placeholder: "\u8F93\u5165\u5173\u952E\u5B57\u641C\u7D22",
+              modelValue: filterKey.value,
+              "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => filterKey.value = $event)
+            }, null, 8, ["modelValue"])
+          ]),
+          vue.createElementVNode("div", _hoisted_4, [
+            vue.createVNode(_component_el_tree, vue.mergeProps(_ctx.$attrs, {
+              data: vue.unref(treeData),
+              "default-expand-all": "",
+              "expand-on-click-node": true,
+              "node-key": __props.props.id,
+              "show-checkbox": "",
+              "check-on-click-node": true,
+              "filter-node-method": filterNode,
+              ref_key: "treeRef",
+              ref: treeRef,
+              props: __props.props,
+              onCheck: updateCheckAll
+            }), null, 16, ["data", "node-key", "props"])
+          ])
+        ]);
+      };
+    }
+  });
+  const tree_vue_vue_type_style_index_0_scoped_3a26171a_lang = "";
+  const Tree = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-3a26171a"]]);
+  const propsType = {
+    data: {
+      type: Array,
+      default: []
+    },
+    targetIds: {
+      type: Array,
+      default: []
+    },
+    props: {
+      type: Object,
+      default: () => ({})
+    },
+    sourceTitle: {
+      type: String,
+      default: "\u6E90"
+    },
+    targetTitle: {
+      type: String,
+      default: "\u76EE\u6807"
+    }
+  };
+  const _hoisted_1 = { class: "tree-transfer" };
+  const _hoisted_2 = { class: "tree-transfer__ctrl" };
+  const __default__ = vue.defineComponent({
+    name: "jlc-tree-transfer"
+  });
+  const _sfc_main = /* @__PURE__ */ vue.defineComponent({
+    ...__default__,
+    props: propsType,
+    setup(__props, { expose }) {
+      const compProps = __props;
+      const props = vue.computed(() => {
+        const { children = "children", parentId = "parentId", id = "id" } = compProps.props;
+        return { ...compProps.props, children, parentId, id };
+      });
+      const hanledData = vue.computed(() => {
+        const { children, parentId, id } = props.value;
+        const data = cloneDeep_1(compProps.data);
+        function eachTree(tree, parent) {
+          for (const item of tree) {
+            if (parent) {
+              if (item[parentId] === void 0) {
+                item[parentId] = parent[id];
+              }
+            }
+            if (item[children]) {
+              eachTree(item[children], item);
+            }
+          }
+        }
+        eachTree(data);
+        return data;
+      });
+      const sourceTreeRef = vue.ref();
+      const targetTreeRef = vue.ref();
+      const getFlatList = () => {
+        return flatTree(hanledData.value, { children: props.value.children }).map((item) => ({
+          ...item,
+          __type__: SOURCE_TYPE
+        }));
+      };
+      const flatList = vue.ref(getFlatList());
+      vue.watch(
+        () => compProps.targetIds,
+        () => {
+          setTargetTree();
+        }
+      );
+      vue.watch(
+        () => compProps.data,
+        () => {
+          flatList.value = getFlatList();
+        }
+      );
+      vue.onMounted(() => {
+        setTargetTree();
+      });
+      const setTargetTree = () => {
+        const { parentId } = props.value;
+        const checkedIds = compProps.targetIds.filter(
+          (id) => !flatList.value.some((item) => item[parentId] === id)
+        );
+        sourceTreeRef.value.tree.setCheckedKeys(checkedIds);
+        vue.nextTick(() => {
+          toTarget();
+        });
+      };
+      const toggle = (tree, type) => {
+        const id = props.value.id;
+        const checkedNodes = new Set(tree.getCheckedNodes().map((item) => item[id]));
+        const halfCheckedNodes = new Set(tree.getHalfCheckedNodes().map((item) => item[id]));
+        for (const item of flatList.value) {
+          if (checkedNodes.has(item[id])) {
+            item.__type__ = type === SOURCE_TYPE ? TARGET_TYPE : SOURCE_TYPE;
+          } else if (halfCheckedNodes.has(item[id])) {
+            item.__type__ = COMMON_TYPE;
+          }
+        }
+      };
+      const toTarget = () => {
+        toggle(sourceTreeRef.value.tree, SOURCE_TYPE);
+      };
+      const toSource2 = () => {
+        toggle(targetTreeRef.value.tree, TARGET_TYPE);
+      };
+      const getSourceNodes = () => sourceTreeRef.value.getNodes();
+      const getTargetNodes = () => targetTreeRef.value.getNodes();
+      const getCommonNodes = () => flatList.value.filter((item) => item.__type__ === COMMON_TYPE);
+      expose({
+        getSourceNodes,
+        getTargetNodes,
+        getCommonNodes
+      });
+      return (_ctx, _cache) => {
+        const _component_el_button = vue.resolveComponent("el-button");
+        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1, [
+          vue.createVNode(Tree, {
+            list: flatList.value,
+            props: vue.unref(props),
+            type: vue.unref(SOURCE_TYPE),
+            title: _ctx.sourceTitle,
+            ref_key: "sourceTreeRef",
+            ref: sourceTreeRef
+          }, null, 8, ["list", "props", "type", "title"]),
+          vue.renderSlot(_ctx.$slots, "middle", {
+            toTarget,
+            toSource: toSource2
+          }, () => [
+            vue.createElementVNode("div", _hoisted_2, [
+              vue.createVNode(_component_el_button, { onClick: toTarget }, {
+                default: vue.withCtx(() => [
+                  vue.createTextVNode("\u6DFB\u52A0 >")
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_button, {
+                class: "tree-transfer__remove",
+                onClick: toSource2
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createTextVNode("< \u79FB\u9664")
+                ]),
+                _: 1
+              })
+            ])
+          ], true),
+          vue.createVNode(Tree, {
+            list: flatList.value,
+            props: vue.unref(props),
+            type: vue.unref(TARGET_TYPE),
+            title: _ctx.targetTitle,
+            ref_key: "targetTreeRef",
+            ref: targetTreeRef
+          }, null, 8, ["list", "props", "type", "title"])
+        ]);
+      };
+    }
+  });
+  const treeTransfer_vue_vue_type_style_index_0_scoped_633ecc7a_lang = "";
+  const TreeTransfer = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-633ecc7a"]]);
   const components = [
     FilterPageList,
     Filter,
     Table,
-    _sfc_main$1,
-    _sfc_main
+    _sfc_main$3,
+    _sfc_main$2,
+    TreeTransfer
   ];
   const index = {
     install(app) {
@@ -2240,9 +2591,10 @@ var jlcAdmin = function(exports, vue, elementPlus) {
   };
   exports.JlcFilter = Filter;
   exports.JlcLayoutFilterPageList = FilterPageList;
-  exports.JlcPage = _sfc_main$1;
-  exports.JlcProTable = _sfc_main;
+  exports.JlcPage = _sfc_main$3;
+  exports.JlcProTable = _sfc_main$2;
   exports.JlcTable = Table;
+  exports.JlcTreeTransfer = TreeTransfer;
   exports.default = index;
   Object.defineProperties(exports, { __esModule: { value: true }, [Symbol.toStringTag]: { value: "Module" } });
   return exports;

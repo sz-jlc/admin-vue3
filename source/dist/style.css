@@ -37,4 +37,33 @@
   justify-content: center;
   align-items: center;
   height: 300px;
+}.transfer-tree[data-v-3a26171a] {
+  flex: 1;
+  border: 1px solid #eee;
+}
+.transfer-tree__check-all[data-v-3a26171a] {
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #f2f6fc;
+}
+.transfer-tree__search[data-v-3a26171a] {
+  padding: 3px;
+  padding-bottom: 0;
+}
+.transfer-tree__main[data-v-3a26171a] {
+  height: 500px;
+  padding: 10px;
+  overflow: auto;
+}.tree-transfer[data-v-633ecc7a] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tree-transfer__ctrl[data-v-633ecc7a] {
+  width: 100px;
+  text-align: center;
+}
+.tree-transfer__remove[data-v-633ecc7a] {
+  margin-top: 10px;
+  margin-left: 0;
 }
