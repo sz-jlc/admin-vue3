@@ -5,6 +5,7 @@
   font-size: 14px;
   border-color: #eee;
   word-break: break-all;
+  border: 1px solid var(--vp-c-divider-light);
 }
 
 .base-table thead,
@@ -39,6 +40,10 @@
   /* border-left: 1px solid var(--vp-c-divider-light);
   border-top: 1px solid var(--vp-c-divider-light); */
   border-bottom: 1px solid var(--vp-c-divider-light);
+}
+
+.base-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 /* .props-table th:last-child,
