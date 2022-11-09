@@ -19,8 +19,9 @@ import '@sz-jlc/admin-vue3/dist/style.css'
 * 内容默认居中
 
 ## 基础用法
-> 用法基本和el-table一致，不一样的是由template方式转为了JS配置方式；\
-> **支持透传el-table的属性和事件，支持调用el-table的方法。**
+> 用法基本和el-table一致，不一样的是由template方式转为了JS配置方式；
+
+**支持透传el-table的属性和事件，支持调用el-table的方法。**
 
 <base-use />
 
@@ -150,7 +151,7 @@ import { JlcTable } from '@sz-jlc/admin-vue3'
 const columns = [
   { label: '姓名', prop: 'name', },
   { label: '性别', prop: 'gender', },
-  { label: '年龄', rop: 'age', },
+  { label: '年龄', prop: 'age', },
   { label: '岗位', prop: 'job', }
 ]
 
@@ -204,7 +205,7 @@ import { ElTag } from 'element-plus'
 import { JlcTable } from '@sz-jlc/admin-vue3'
 
 const genderMap = { 0: '女', 1: '男' }
-const genderTagTypeMap = { 0: 'warning', 1: '' }
+const genderTagTypeMap = { 0: 'danger', 1: '' }
 
 const columns = [
   { label: '姓名', prop: 'name', },

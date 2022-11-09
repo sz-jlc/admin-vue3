@@ -55,5 +55,5 @@ export default defineConfig({
   ignoreDeadLinks: true,
   lastUpdated: true,
   cleanUrls: 'with-subfolders',
-  base: '/admin-vue3/'
+  base: process.env.NODE_ENV === 'production' ?  '/admin-vue3/' : ''
 })

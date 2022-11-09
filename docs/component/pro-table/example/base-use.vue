@@ -83,9 +83,10 @@ const getData = (queryParams: any): Promise<any> => {
           if (gender === null || gender === undefined) return true
           return item.gender === gender
         })
+      const lastPage = pageNum * pageSize
       resolve({
         // 模拟分页
-        list: list.slice((pageNum - 1) * pageSize, pageNum * pageSize),
+        list: list.slice(lastPage - pageSize, lastPage),
         total: list.length,
       })
     }, Math.random() * 200)

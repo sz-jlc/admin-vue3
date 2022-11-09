@@ -46,8 +46,9 @@ const columns = [
 const getData = (queryParams: any): any => {
   console.log(queryParams)
   const { pageNum, pageSize } = queryParams
+  const lastPage = pageNum * pageSize
   return {
-    list: mockData.slice((pageNum - 1) * pageSize, pageNum * pageSize),
+    list: mockData.slice(lastPage - pageSize, lastPage),
     total: mockData.length
   }
 }

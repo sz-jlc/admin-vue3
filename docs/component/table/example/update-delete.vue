@@ -15,7 +15,7 @@ import { JlcTable } from '@sz-jlc/admin-vue3'
 const columns = [
   { label: '姓名', prop: 'name', },
   { label: '性别', prop: 'gender', },
-  { label: '年龄', rop: 'age', },
+  { label: '年龄', prop: 'age', },
   { label: '岗位', prop: 'job', }
 ]
 

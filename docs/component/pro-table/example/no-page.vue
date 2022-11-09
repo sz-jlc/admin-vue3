@@ -4,12 +4,7 @@
     :columns="columns" 
     :get-data="getData"
     :is-page="false"
-    :filter-props="{ columnCount: 3 }"
-  >
-    <template #table-gender="{ row }">
-      {{ genderMap[row.gender] }}
-    </template>
-  </jlc-pro-table>
+  ></jlc-pro-table>
 </template>
 
 <script setup lang='ts'>
@@ -38,11 +33,6 @@ const mockData = [
     introduction: '资深架构师，解决过无数疑难杂症，擅长系统设计。'
   },
 ]
-
-const genderMap = {
-  0: '女',
-  1: '男'
-}
 
 const columns = [
   { label: '姓名', prop: 'name' },

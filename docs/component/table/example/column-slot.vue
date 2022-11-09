@@ -13,7 +13,7 @@ import { ElTag } from 'element-plus'
 import { JlcTable } from '@sz-jlc/admin-vue3'
 
 const genderMap = { 0: '女', 1: '男' }
-const genderTagTypeMap = { 0: 'warning', 1: '' }
+const genderTagTypeMap = { 0: 'danger', 1: '' }
 
 const columns = [
   { label: '姓名', prop: 'name', },

@@ -55,9 +55,10 @@ const columns = [
 const getData = (queryParams: any): any => {
   const { pageSize, pageNum } = queryParams
   const list = mockData
+  const lastPage = pageNum * pageSize
   return {
     // 模拟分页
-    list: list.slice((pageNum - 1) * pageSize, pageNum * pageSize),
+    list: list.slice(lastPage - pageSize, lastPage),
     total: list.length,
   }
 }

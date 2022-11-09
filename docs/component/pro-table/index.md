@@ -105,9 +105,10 @@ const getData = (queryParams: any): Promise<any> => {
           if (gender === null || gender === undefined) return true
           return item.gender === gender
         })
+      const lastPage = pageNum * pageSize
       resolve({
         // 模拟分页
-        list: list.slice((pageNum - 1) * pageSize, pageNum * pageSize),
+        list: list.slice(lastPage - pageSize, lastPage),
         total: list.length,
       })
     }, Math.random() * 200)
@@ -121,7 +122,7 @@ const getData = (queryParams: any): Promise<any> => {
 
 <manual-query />
 
-``` vue{10,66}
+``` vue{10,65}
 <template>
   <div style="margin-bottom: 10px;">
     <el-button @click="onQuery()">查询</el-button>
@@ -173,7 +174,6 @@ const proTableRef = ref()
 
 const columns = [
   { label: '姓名', prop: 'name' },
-  { label: '性别', slot: 'table-gender'},
   { label: '年龄', prop: 'age' },
   { label: '岗位', prop: 'job' },
   { label: '个人介绍', prop: 'introduction', align: 'left' },
@@ -187,9 +187,10 @@ const getData = (): any => {
 }
 
 const onQuery = () => {
-  proTableRef.value.refresh()
+  proTableRef.value.query()
 }
 </script>
+
 ```
 
 ## 初始页面尺寸
@@ -199,7 +200,7 @@ const onQuery = () => {
 <template>
   <jlc-pro-table 
     ref="proTableRef"
-    :filters="[]" 
+    :filters="[{ key: 'a' }]" 
     :columns="columns" 
     :get-data="getData"
     :filter-props="{ columnCount: 3 }"
@@ -236,15 +237,17 @@ const mockData = [
 
 const columns = [
   { label: '姓名', prop: 'name' },
-  { label: '性别', slot: 'table-gender'},
   { label: '年龄', prop: 'age' },
   { label: '岗位', prop: 'job' },
   { label: '个人介绍', prop: 'introduction', align: 'left' },
 ]
 
-const getData = (): any => {
+const getData = (queryParams: any): any => {
+  console.log(queryParams)
+  const { pageNum, pageSize } = queryParams
+  const lastPage = pageNum * pageSize
   return {
-    list: mockData,
+    list: mockData.slice(lastPage - pageSize, lastPage),
     total: mockData.length
   }
 }
@@ -256,7 +259,7 @@ const getData = (): any => {
 
 <local-page />
 
-``` vue{56,60}
+``` vue{56,61}
 <template>
   <jlc-pro-table 
     :filters="[]" 
@@ -314,9 +317,10 @@ const columns = [
 const getData = (queryParams: any): any => {
   const { pageSize, pageNum } = queryParams
   const list = mockData
+  const lastPage = pageNum * pageSize
   return {
     // 模拟分页
-    list: list.slice((pageNum - 1) * pageSize, pageNum * pageSize),
+    list: list.slice(lastPage - pageSize, lastPage),
     total: list.length,
   }
 }
@@ -336,12 +340,7 @@ const getData = (queryParams: any): any => {
     :columns="columns" 
     :get-data="getData"
     :is-page="false"
-    :filter-props="{ columnCount: 3 }"
-  >
-    <template #table-gender="{ row }">
-      {{ genderMap[row.gender] }}
-    </template>
-  </jlc-pro-table>
+  ></jlc-pro-table>
 </template>
 
 <script setup lang='ts'>
@@ -371,14 +370,8 @@ const mockData = [
   },
 ]
 
-const genderMap = {
-  0: '女',
-  1: '男'
-}
-
 const columns = [
   { label: '姓名', prop: 'name' },
-  { label: '性别', slot: 'table-gender'},
   { label: '年龄', prop: 'age' },
   { label: '岗位', prop: 'job' },
   { label: '个人介绍', prop: 'introduction', align: 'left' },
