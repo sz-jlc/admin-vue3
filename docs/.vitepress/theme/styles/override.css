@@ -8,6 +8,10 @@
   min-width: 100%;
 }
 
+.VPDoc.has-aside .aside {
+  max-width: 200px;
+}
+
 .VPSidebarGroup {
   padding: 20px 0;
 }

@@ -19,7 +19,7 @@ export default defineConfig({
             { text: 'Page', link: '/component/page/index.html' },
             { text: 'ProTable', link: '/component/pro-table/index.html' },
             // { text: 'ProList', link: '/component/pro-list/index.html' },
-            // { text: 'TreeTransfer', link: '/component/tree-transfer/index.html' },
+            { text: 'TreeTransfer', link: '/component/tree-transfer/index.html' },
             // { text: 'AoeDialog', link: '/component/aoe-dialog/index.html' },
             // { text: 'AoeDrawer', link: '/component/aoe-drawer/index.html' },
           ]

@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sz-jlc/admin-vue3": "workspace:^1.0.0",
+    "@sz-jlc/admin-vue3": "workspace:*",
     "element-plus": "^2.2.19",
     "vitepress": "1.0.0-alpha.26",
     "vue": "^3.2.41"

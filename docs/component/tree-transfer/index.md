@@ -1,20 +1,273 @@
 <script setup>
-
+import BaseUse from './example/base-use.vue'
+import CustomField from './example/custom-field.vue'
+import InitTarget from './example/init-target.vue'
 </script>
 
 # TreeTransfer 树形穿梭框
-
-## 为什么使用？
-* 采用JS配置方式生成筛选表单，大部分情况下会比写html稍微方便一点点
-* 自动布局，默认遵循当前ERP**每行5个表单元素**的规则，同时**提供了参数配置该项**
-* 提供了`trim`配置，输入框默认会被trim处理
-* 提供了`transofrm`配置，有时表单元素绑定的值并不是搜索的值，比如日期选择器
-* 提供了`enterQuery`配置（回车触发搜索），默认开启
-* 表单元素提供了缺省的`placeholder`
-* 表单元素默认传递了`clearable`
-* 阻止了表单的默认事件，避免当只有一个表单元素，回车时导致页面刷新
+基于el-tree封装的树形穿梭框
 
 ## 基础用法
+<base-use />
+
+``` vue
+<template>
+  <jlc-tree-transfer :data="data" source-title="我是源树标题" target-title="我是目标树标题" />
+</template>
+
+<script setup lang='ts'>
+import { JlcTreeTransfer } from '@sz-jlc/admin-vue3'
+
+const data = [
+  {
+    label: "Level one 1",
+    id: 1,
+    children: [
+      {
+        label: "Level two 1-1",
+        id: 2,
+        children: [
+          {
+            label: "Level three 1-1-1",
+            id: 3,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Level one 2",
+    id: 4,
+    children: [
+      {
+        label: "Level two 2-1",
+        id: 5,
+        children: [
+          {
+            label: "Level three 2-1-1",
+            id: 6,
+          },
+        ],
+      },
+      {
+        label: "Level two 2-2",
+        id: 7,
+        children: [
+          {
+            label: "Level three 2-2-1",
+            id: 8,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Level one 3",
+    id: 9,
+    children: [
+      {
+        label: "Level two 3-1",
+        id: 10,
+        children: [
+          {
+            label: "Level three 3-1-1",
+            id: 11,
+          },
+        ],
+      },
+      {
+        label: "Level two 3-2",
+        id: 12,
+        children: [
+          {
+            label: "Level three 3-2-1",
+            id: 13,
+          },
+        ],
+      },
+    ],
+  },
+]
+</script>
+```
+
+## 初始目标数据
+<init-target />
+
+``` vue
+<template>
+  <jlc-tree-transfer :data="data" :target-ids="targetIds"/>
+</template>
+
+<script setup lang='ts'>
+import { JlcTreeTransfer } from '@sz-jlc/admin-vue3'
+
+const data = [
+  {
+    label: "Level one 1",
+    id: 1,
+    children: [
+      {
+        label: "Level two 1-1",
+        id: 2,
+        children: [
+          {
+            label: "Level three 1-1-1",
+            id: 3,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Level one 2",
+    id: 4,
+    children: [
+      {
+        label: "Level two 2-1",
+        id: 5,
+        children: [
+          {
+            label: "Level three 2-1-1",
+            id: 6,
+          },
+        ],
+      },
+      {
+        label: "Level two 2-2",
+        id: 7,
+        children: [
+          {
+            label: "Level three 2-2-1",
+            id: 8,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Level one 3",
+    id: 9,
+    children: [
+      {
+        label: "Level two 3-1",
+        id: 10,
+        children: [
+          {
+            label: "Level three 3-1-1",
+            id: 11,
+          },
+        ],
+      },
+      {
+        label: "Level two 3-2",
+        id: 12,
+        children: [
+          {
+            label: "Level three 3-2-1",
+            id: 13,
+          },
+        ],
+      },
+    ],
+  },
+]
+
+const targetIds = [1, 3, 6]
+</script>
+```
+
+## 自定义数据字段
+> 有时数据结构并不一定符合组件要求，那么就可以自定义数据的字段名，可以配置id字段名，以及理论上支持el-tree的所有props，但目前暂未核实，如有问题请反馈。
+
+<custom-field />
+
+``` vue
+<template>
+  <jlc-tree-transfer :data="data" :props="props" />
+</template>
+
+<script setup lang='ts'>
+import { JlcTreeTransfer } from '@sz-jlc/admin-vue3'
+
+const props = {
+  children: 'subTree',
+  id: 'uid',
+  label: 'title'
+}
+
+const data = [
+  {
+    title: "Level one 1",
+    uid: 1,
+    subTree: [
+      {
+        title: "Level two 1-1",
+        uid: 2,
+        subTree: [
+          {
+            title: "Level three 1-1-1",
+            uid: 3,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Level one 2",
+    uid: 4,
+    subTree: [
+      {
+        title: "Level two 2-1",
+        uid: 5,
+        subTree: [
+          {
+            title: "Level three 2-1-1",
+            uid: 6,
+          },
+        ],
+      },
+      {
+        title: "Level two 2-2",
+        uid: 7,
+        subTree: [
+          {
+            title: "Level three 2-2-1",
+            uid: 8,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Level one 3",
+    uid: 9,
+    subTree: [
+      {
+        title: "Level two 3-1",
+        uid: 10,
+        subTree: [
+          {
+            title: "Level three 3-1-1",
+            uid: 11,
+          },
+        ],
+      },
+      {
+        title: "Level two 3-2",
+        uid: 12,
+        subTree: [
+          {
+            title: "Level three 3-2-1",
+            uid: 13,
+          },
+        ],
+      },
+    ],
+  },
+]
+</script>
+```
 
 ## 属性
 <table class="base-table props-table">
@@ -30,25 +283,49 @@
   </thead>
   <tbody>
     <tr>
-      <td>filters</td>
-      <td>筛选项列表</td>
-      <td>FilterItem[]</td>
+      <td>data</td>
+      <td>树形数据</td>
+      <td>Object[]</td>
       <td>-</td>
       <td>-</td>
       <td>是</td>
     </tr>
     <tr>
-      <td>columnCount</td>
-      <td>每行多少个表单元素</td>
-      <td>number</td>
+      <td>targetIds</td>
+      <td>目标数据id列表</td>
+      <td>any[]</td>
       <td>-</td>
-      <td>5</td>
+      <td>-</td>
+      <td>否</td>
+    </tr>
+    <tr>
+      <td>props</td>
+      <td>自定义字段名，详细配置见下文</td>
+      <td>Object</td>
+      <td>-</td>
+      <td>-</td>
+      <td>否</td>
+    </tr>
+    <tr>
+      <td>sourceTitle</td>
+      <td>源树标题</td>
+      <td>string</td>
+      <td>-</td>
+      <td>源</td>
+      <td>否</td>
+    </tr>
+    <tr>
+      <td>targetTitle</td>
+      <td>目标树标题</td>
+      <td>string</td>
+      <td>-</td>
+      <td>目标</td>
       <td>否</td>
     </tr>
   </tbody>
 </table>
 
-## FilterItem
+### Props
 <table class="base-table props-table">
   <thead>
     <tr>
@@ -62,156 +339,28 @@
   </thead>
   <tbody>
     <tr>
-        <td>component</td>
-        <td>组件</td>
-        <td>string</td>
-        <td>-</td>
-        <td>el-input</td>
-        <td>否</td>
+      <td>id</td>
+      <td>唯一id的字段名，不同子集下的id也要不一样</td>
+      <td>any</td>
+      <td>-</td>
+      <td>-</td>
+      <td>否</td>
     </tr>
     <tr>
-        <td>key</td>
-        <td> 绑定字段</td>
-        <td>string | string[]</td>
-        <td>-</td>
-        <td>-</td>
-        <td>是</td>
+      <td>parentId</td>
+      <td>父级id</td>
+      <td>any</td>
+      <td>-</td>
+      <td>-</td>
+      <td>否</td>
     </tr>
     <tr>
-        <td>value</td>
-        <td> 初始值</td>
-        <td>any</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>label</td>
-        <td>表单label</td>
-        <td>string</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>type</td>
-        <td>类型，当前仅有一个rangeTime</td>
-        <td>string</td>
-        <td>rangeTime</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>attrs</td>
-        <td>组件属性</td>
-        <td>object</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>events</td>
-        <td>组件事件</td>
-        <td>object</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>slot</td>
-        <td>插槽</td>
-        <td>string</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>trim</td>
-        <td>是否对查询值进行trim处理</td>
-        <td>boolean</td>
-        <td>-</td>
-        <td>true</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>transform</td>
-        <td>查询值转换函数</td>
-        <td>(value: any) =&gt; any</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>flatTransform</td>
-        <td>是否拉平转换查询值，当transform返回一个对象时有用</td>
-        <td>boolean</td>
-        <td>-</td>
-        <td>false</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>enterQuery</td>
-        <td>回车时是否触发查询</td>
-        <td>boolean</td>
-        <td>-</td>
-        <td>true</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>clearable</td>
-        <td>表单值是否可清除</td>
-        <td>boolean</td>
-        <td>-</td>
-        <td>true</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>children</td>
-        <td>子元素，通常可用来应对select组件</td>
-        <td>object</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>children.component</td>
-        <td> 子元素的组件名</td>
-        <td>string</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>children.content</td>
-        <td>子元素的内容</td>
-        <td>string</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>children.render</td>
-        <td>子元素的render函数，需要返回一个VNode</td>
-        <td>(bindForm?: object) =&gt; VNode</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>children.attrs</td>
-        <td>子元素的属性</td>
-        <td>object</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
-    </tr>
-    <tr>
-        <td>children.events</td>
-        <td>子元素的事件</td>
-        <td>object</td>
-        <td>-</td>
-        <td>-</td>
-        <td>否</td>
+      <td>el-tree的props</td>
+      <td>预期情况下支持所有el-tree的props，若某个场景下存在问题，请反馈。</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>否</td>
     </tr>
   </tbody>
 </table>
@@ -227,22 +376,19 @@
   </thead>
   <tbody>
     <tr>
-        <td>query</td>
-        <td>查询</td>
-        <td>
-          <ul class="m-0">
-            <li>queryNow(是否执行查询，会传递给query事件作为回调参数)</li>
-          </ul>
-        </td>
+      <td>getSourceNodes</td>
+      <td>获取源树节点</td>
+      <td>-</td>
     </tr>
     <tr>
-        <td>reset</td>
-        <td>重置</td>
-        <td>
-          <ul class="m-0">
-            <li>queryNow(是否执行查询，会传递给reset事件作为回调参数)</li>
-          </ul>
-        </td>
+      <td>getTargetNodes</td>
+      <td>获取目标树节点</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>getCommonNodes</td>
+      <td>获取源树和目标树均有的节点</td>
+      <td>-</td>
     </tr>
   </tbody>
 </table>
@@ -258,24 +404,9 @@
   </thead>
   <tbody>
     <tr>
-        <td>query</td>
-        <td>触发查询时，会在输入框回车、点击查询、外部调用query方法时触发</td>
-        <td>
-          <ul class="m-0">
-            <li>queryParams(查询参数)</li>
-            <li>queryNow(是否执行查询，通过query方法传入的参数)</li>
-          </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>reset</td>
-        <td>触发重置时，会在点击重置、外部调用reset方法时触发</td>
-        <td>
-          <ul class="m-0">
-            <li>queryParams(查询参数)</li>
-            <li>queryNow(是否执行查询，通过reset方法传入的参数)</li>
-          </ul>
-        </td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
     </tr>
   </tbody>
 </table>
@@ -290,8 +421,8 @@
   </thead>
   <tbody>
     <tr>
-        <td>-</td>
-        <td>-</td>
+        <td>middle</td>
+        <td>源树和目标树中间的操作按钮，可接收到两个方法：toTarget、toSource</td>
     </tr>
   </tbody>
 </table>
