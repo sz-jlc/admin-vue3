@@ -46,19 +46,6 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     ]);
   }
   const FilterPageList = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render], ["__scopeId", "data-v-59b2b166"]]);
-  const withInstall = (main, extra) => {
-    main.install = (app) => {
-      for (const comp of [main, ...Object.values(extra != null ? extra : {})]) {
-        app.component(comp.name, comp);
-      }
-    };
-    if (extra) {
-      for (const [key, comp] of Object.entries(extra)) {
-        main[key] = comp;
-      }
-    }
-    return main;
-  };
   const compose = (...fns) => {
     return fns.reduce(
       (a, b) => (...args) => a(b(...args))
@@ -1597,7 +1584,6 @@ var jlcAdmin = function(exports, vue, elementPlus) {
   });
   const filter_vue_vue_type_style_index_0_scoped_91c5ff49_lang = "";
   const Filter = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-91c5ff49"]]);
-  const JlcFilter = withInstall(Filter);
   const propsType$4 = {
     columns: {
       type: Array,
@@ -2232,7 +2218,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
           _ctx.filters.length ? {
             name: "filter",
             fn: vue.withCtx(() => [
-              vue.createVNode(vue.unref(JlcFilter), vue.mergeProps({
+              vue.createVNode(vue.unref(Filter), vue.mergeProps({
                 ref_key: "filterRef",
                 ref: filterRef
               }, _ctx.filterProps, vue.toHandlers(_ctx.filterEvents), {
@@ -2612,7 +2598,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
   });
   const components = [
     FilterPageList,
-    JlcFilter,
+    Filter,
     Table,
     _sfc_main$4,
     _sfc_main$3,
@@ -2627,7 +2613,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     }
   };
   exports.JlcConfigProvider = _sfc_main;
-  exports.JlcFilter = JlcFilter;
+  exports.JlcFilter = Filter;
   exports.JlcLayoutFilterPageList = FilterPageList;
   exports.JlcPage = _sfc_main$4;
   exports.JlcProTable = _sfc_main$3;

@@ -1,7 +1,7 @@
 "use strict";
 const vue = require("vue");
 const layouts_filterPageList_filterPageList_vue = require("../../../layouts/filter-page-list/filter-page-list.vue.483e4911.js");
-const components_filter_index_ts = require("../../filter/index.ts.63611000.js");
+const components_filter_src_filter_vue = require("../../filter/src/filter.vue.e957ae31.js");
 const components_table_src_table_vue = require("../../table/src/table.vue.6c079a5e.js");
 const components_page_src_page_vue_vue_type_script_setup_true_name_jlcPage_lang_ts = require("../../page/src/page.vue_vue_type_script_setup_true_name_jlc-page_lang.ts.f4f52a34.js");
 const hooks_useFilterPage_ts = require("../../../hooks/use-filter-page.ts.095350cc.js");
@@ -121,7 +121,7 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
         _ctx.filters.length ? {
           name: "filter",
           fn: vue.withCtx(() => [
-            vue.createVNode(vue.unref(components_filter_index_ts.JlcFilter), vue.mergeProps({
+            vue.createVNode(vue.unref(components_filter_src_filter_vue.Filter), vue.mergeProps({
               ref_key: "filterRef",
               ref: filterRef
             }, _ctx.filterProps, vue.toHandlers(_ctx.filterEvents), {

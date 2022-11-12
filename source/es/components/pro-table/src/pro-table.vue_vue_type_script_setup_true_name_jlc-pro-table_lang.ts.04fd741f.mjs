@@ -1,6 +1,6 @@
 import { defineComponent, computed, ref, onMounted, openBlock, createBlock, unref, createSlots, withCtx, renderSlot, createVNode, mergeProps, toHandlers, renderList, normalizeProps, guardReactiveProps } from "vue";
 import { F as FilterPageList } from "../../../layouts/filter-page-list/filter-page-list.vue.2f793a0f.mjs";
-import { J as JlcFilter } from "../../filter/index.ts.a270331b.mjs";
+import { F as Filter } from "../../filter/src/filter.vue.e6339c61.mjs";
 import { T as Table } from "../../table/src/table.vue.9617221e.mjs";
 import { _ as _sfc_main$1 } from "../../page/src/page.vue_vue_type_script_setup_true_name_jlc-page_lang.ts.385099bd.mjs";
 import { u as useFilterPage } from "../../../hooks/use-filter-page.ts.33f1abac.mjs";
@@ -120,7 +120,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         _ctx.filters.length ? {
           name: "filter",
           fn: withCtx(() => [
-            createVNode(unref(JlcFilter), mergeProps({
+            createVNode(unref(Filter), mergeProps({
               ref_key: "filterRef",
               ref: filterRef
             }, _ctx.filterProps, toHandlers(_ctx.filterEvents), {

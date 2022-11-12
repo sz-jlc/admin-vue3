@@ -1,13 +1,13 @@
 import { F as FilterPageList } from "./layouts/filter-page-list/filter-page-list.vue.2f793a0f.mjs";
 import { F } from "./layouts/filter-page-list/filter-page-list.vue.2f793a0f.mjs";
-import { J as JlcFilter } from "./components/filter/index.ts.a270331b.mjs";
-import { J } from "./components/filter/index.ts.a270331b.mjs";
+import { F as Filter } from "./components/filter/src/filter.vue.e6339c61.mjs";
+import { F as F2 } from "./components/filter/src/filter.vue.e6339c61.mjs";
 import { T as Table } from "./components/table/src/table.vue.9617221e.mjs";
 import { T } from "./components/table/src/table.vue.9617221e.mjs";
 import { _ as _sfc_main } from "./components/page/src/page.vue_vue_type_script_setup_true_name_jlc-page_lang.ts.385099bd.mjs";
 import { _ } from "./components/page/src/page.vue_vue_type_script_setup_true_name_jlc-page_lang.ts.385099bd.mjs";
-import { _ as _sfc_main$1 } from "./components/pro-table/src/pro-table.vue_vue_type_script_setup_true_name_jlc-pro-table_lang.ts.1cb6944a.mjs";
-import { _ as _2 } from "./components/pro-table/src/pro-table.vue_vue_type_script_setup_true_name_jlc-pro-table_lang.ts.1cb6944a.mjs";
+import { _ as _sfc_main$1 } from "./components/pro-table/src/pro-table.vue_vue_type_script_setup_true_name_jlc-pro-table_lang.ts.04fd741f.mjs";
+import { _ as _2 } from "./components/pro-table/src/pro-table.vue_vue_type_script_setup_true_name_jlc-pro-table_lang.ts.04fd741f.mjs";
 import { T as TreeTransfer } from "./components/tree-transfer/src/tree-transfer.vue.cb7ac7f8.mjs";
 import { T as T2 } from "./components/tree-transfer/src/tree-transfer.vue.cb7ac7f8.mjs";
 import { _ as _sfc_main$2 } from "./components/config-provider/src/config-provider.vue_vue_type_script_setup_true_name_jlc-config-provider_lang.ts.44f825d2.mjs";
@@ -15,13 +15,11 @@ import { _ as _3 } from "./components/config-provider/src/config-provider.vue_vu
 import "./layouts/filter-page-list/filter-page-list.vue_vue_type_script_lang.ts.2a313087.mjs";
 import "vue";
 import "./layouts/filter-page-list/filter-page-list.vue_vue_type_style_index_0_scoped_59b2b166_lang.scss.42757383.mjs";
-import "./components/filter/src/filter.vue.e6339c61.mjs";
 import "./components/filter/src/filter.vue_vue_type_script_setup_true_name_jlc-filter_lang.ts.91f7cef5.mjs";
 import "./utils/tools.ts.e8d38fbf.mjs";
 import "./vendor/index.js.d5491dba.mjs";
 import "./components/filter/src/filter.ts.1ac07432.mjs";
 import "./components/filter/src/filter.vue_vue_type_style_index_0_scoped_91c5ff49_lang.scss.03c33d90.mjs";
-import "./utils/with-install.ts.c8db453d.mjs";
 import "./components/table/src/table.vue_vue_type_script_setup_true_name_jlc-table_lang.ts.ad3325f6.mjs";
 import "element-plus";
 import "./components/table/src/table.ts.d33ed4fb.mjs";
@@ -43,7 +41,7 @@ import "./components/tree-transfer/src/tree-transfer.vue_vue_type_style_index_0_
 import "./components/config-provider/src/config-provider.ts.f8fa73af.mjs";
 const components = [
   FilterPageList,
-  JlcFilter,
+  Filter,
   Table,
   _sfc_main,
   _sfc_main$1,
@@ -59,7 +57,7 @@ const index = {
 };
 export {
   _3 as JlcConfigProvider,
-  J as JlcFilter,
+  F2 as JlcFilter,
   F as JlcLayoutFilterPageList,
   _ as JlcPage,
   _2 as JlcProTable,

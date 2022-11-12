@@ -1,6 +1,6 @@
 {
   "name": "@sz-jlc/admin-vue3",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "深圳嘉立创管理端组件库，Vue3版本",
   "main": "lib/index.js",
   "module": "es/index.js",

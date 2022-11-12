@@ -28,6 +28,16 @@ app.mount('#app')
 目前暂未提供组件全局声明文件供引入，所以全局注册方式无法获得ts类型提示，后续会提供
 :::
 
+## Volar 支持
+同element-plus一样，如果您使用 Volar，请在 tsconfig.json 中通过 compilerOptions.types 指定全局组件类型。
+``` json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "types": ["@sz-jlc/admin-vue3/global"]
+  }
+}
+```
 
 ## 局部导入
 ``` vue
