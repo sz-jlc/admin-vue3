@@ -1,66 +1,3 @@
-<script setup>
-import ConfigProvider from './example/config-provider.vue'
-</script>
-
-# 指南
-嘉立创管理端组件库使用指南
-
-## 安装
-```
-npm install @sz-jlc/admin-vue3
-```
-
-::: tip
-当前组件库基于element-plus进行二次封装，所以安装之前确保安装了vue3以及element-plus
-:::
-
-## 全局注册
-``` js
-import { createApp } from 'vue'
-import JlcAdmin from '@sz-jlc/admin-vue3'
-import '@sz-jlc/admin-vue3/dist/style.css'
-
-const app = createApp()
-app.use(JlcAdmin)
-app.mount('#app')
-```
-::: tip
-目前暂未提供组件全局声明文件供引入，所以全局注册方式无法获得ts类型提示，后续会提供
-:::
-
-
-## 局部导入
-``` vue
-<script setup>
-import { JlcProTable } from '@sz-jlc/admin-vue3'
-</script>
-```
-
-::: warning
-局部导入依然需要导入样式：
-import '@sz-jlc/admin-vue3/dist/style.css'
-:::
-
-
-## 标签引入
-``` html
-<script src="jlc-admin-vue3/dist/index.js"></script>
-<link href="jlc-admin-vue3/dist/style.css"></link>
-```
-::: warning
-当前组件库暂无CDN链接，请自行下载npm包进行标签引入
-
-同时还需要存在全局变量：Vue、ElementPlus
-:::
-
-## 全局配置
-目前仅提供了一个转换分页数据的全局配置(transformPageData)，后续会支持更多组件的默认配置注入。
-
-> 如下示例，有时提供的数据结构和组件需要的数据结构并不一样，则可以通过注入全局配置。
-
-<config-provider />
-
-``` vue{2,15-25,79-80}
 <template>
   <jlc-config-provider :transform-page-data="transformPageData">
     <jlc-pro-table 
@@ -77,7 +14,7 @@ import { JlcProTable, JlcConfigProvider } from '@sz-jlc/admin-vue3'
 
 // 将接口返回的数据转换为组件需要的数据结构
 // 因为这里是提供了一个方法，所以可以有很多灵活的用法：
-// 比如对接口响应数据进行容错处理（如data为null的情况）
+// 比如对接口响应数据进行容错处理（如data为null的情况）；
 // 比如之前遇到接口返回的totalRows是一个字符串，传递给el-page组件后导致异常，也可以通过这里进行处理
 const transformPageData = (data: any) => {
   const { listData, totalRows } = data
@@ -146,4 +83,3 @@ const getData = (queryParams: any): Promise<any> => {
   })
 }
 </script>
-```
