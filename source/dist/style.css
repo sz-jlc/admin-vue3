@@ -54,16 +54,16 @@
   height: 500px;
   padding: 10px;
   overflow: auto;
-}.tree-transfer[data-v-633ecc7a] {
+}.tree-transfer[data-v-6804a2c7] {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.tree-transfer__ctrl[data-v-633ecc7a] {
+.tree-transfer__ctrl[data-v-6804a2c7] {
   width: 100px;
   text-align: center;
 }
-.tree-transfer__remove[data-v-633ecc7a] {
+.tree-transfer__remove[data-v-6804a2c7] {
   margin-top: 10px;
   margin-left: 0;
 }

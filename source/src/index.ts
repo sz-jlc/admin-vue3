@@ -5,6 +5,7 @@ import JlcTable from './components/table'
 import JlcPage from './components/page'
 import JlcProTable from './components/pro-table'
 import JlcTreeTransfer from './components/tree-transfer'
+import JlcConfigProvider from './components/config-provider'
 
 export { 
   JlcLayoutFilterPageList, 
@@ -12,7 +13,8 @@ export {
   JlcTable, 
   JlcPage, 
   JlcProTable,
-  JlcTreeTransfer
+  JlcTreeTransfer,
+  JlcConfigProvider
 }
 
 const components = [
@@ -21,7 +23,8 @@ const components = [
   JlcTable, 
   JlcPage, 
   JlcProTable,
-  JlcTreeTransfer
+  JlcTreeTransfer,
+  JlcConfigProvider
 ]
 
 export default {

@@ -1,6 +1,6 @@
 var jlcAdmin = function(exports, vue, elementPlus) {
   "use strict";
-  const _sfc_main$6 = vue.defineComponent({
+  const _sfc_main$7 = vue.defineComponent({
     name: "filter-page-list-layout"
   });
   const filterPageList_vue_vue_type_style_index_0_scoped_59b2b166_lang = "";
@@ -45,7 +45,20 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       ], 512)
     ]);
   }
-  const FilterPageList = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render], ["__scopeId", "data-v-59b2b166"]]);
+  const FilterPageList = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render], ["__scopeId", "data-v-59b2b166"]]);
+  const withInstall = (main, extra) => {
+    main.install = (app) => {
+      for (const comp of [main, ...Object.values(extra != null ? extra : {})]) {
+        app.component(comp.name, comp);
+      }
+    };
+    if (extra) {
+      for (const [key, comp] of Object.entries(extra)) {
+        main[key] = comp;
+      }
+    }
+    return main;
+  };
   const compose = (...fns) => {
     return fns.reduce(
       (a, b) => (...args) => a(b(...args))
@@ -1292,7 +1305,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
   }
   var cloneDeep_1 = cloneDeep;
-  const propsType$4 = {
+  const propsType$5 = {
     filters: {
       type: Array,
       default: () => [],
@@ -1310,12 +1323,12 @@ var jlcAdmin = function(exports, vue, elementPlus) {
   const _hoisted_1$3 = { class: "el-date-table-cell" };
   const _hoisted_2$3 = { class: "el-date-table-cell__text" };
   const _hoisted_3$2 = { class: "filter__ctrl" };
-  const __default__$4 = vue.defineComponent({
+  const __default__$5 = vue.defineComponent({
     name: "jlc-filter"
   });
-  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$4,
-    props: propsType$4,
+  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$5,
+    props: propsType$5,
     emits: emitsType$3,
     setup(__props, { expose, emit }) {
       const props = __props;
@@ -1583,8 +1596,9 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     }
   });
   const filter_vue_vue_type_style_index_0_scoped_91c5ff49_lang = "";
-  const Filter = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-91c5ff49"]]);
-  const propsType$3 = {
+  const Filter = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-91c5ff49"]]);
+  const JlcFilter = withInstall(Filter);
+  const propsType$4 = {
     columns: {
       type: Array,
       default: () => [],
@@ -1629,12 +1643,12 @@ var jlcAdmin = function(exports, vue, elementPlus) {
   const _hoisted_6 = [
     _hoisted_5
   ];
-  const __default__$3 = vue.defineComponent({
+  const __default__$4 = vue.defineComponent({
     name: "jlc-table"
   });
-  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$3,
-    props: propsType$3,
+  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$4,
+    props: propsType$4,
     emits: emitsType$2,
     setup(__props, { expose, emit }) {
       const props = __props;
@@ -1801,9 +1815,9 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     }
   });
   const table_vue_vue_type_style_index_0_scoped_4a11fadd_lang = "";
-  const Table = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-4a11fadd"]]);
+  const Table = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-4a11fadd"]]);
   const DEFAULT_PAGE_SIZE = 15;
-  const propsType$2 = {
+  const propsType$3 = {
     total: {
       type: Number,
       required: true
@@ -1812,12 +1826,12 @@ var jlcAdmin = function(exports, vue, elementPlus) {
   const emitsType$1 = [
     "query"
   ];
-  const __default__$2 = vue.defineComponent({
+  const __default__$3 = vue.defineComponent({
     name: "jlc-page"
   });
-  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$2,
-    props: propsType$2,
+  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$3,
+    props: propsType$3,
     emits: emitsType$1,
     setup(__props, { expose, emit }) {
       const props = __props;
@@ -1874,7 +1888,9 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       };
     }
   });
+  const configProviderContextKey = Symbol();
   const useFilterPage = ({ props, emit, params }) => {
+    const globalConfig = vue.inject(configProviderContextKey, {});
     const filterRef = vue.ref();
     const pageRef = vue.ref();
     const total = vue.ref(0);
@@ -1970,6 +1986,9 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       });
     };
     const handleQueryData = (queryData2) => {
+      if (globalConfig == null ? void 0 : globalConfig.transformPageData) {
+        queryData2 = globalConfig.transformPageData(queryData2);
+      }
       const throwErr = () => {
         const errMsg = `
       [jlc-table] getData\u63A5\u6536\u5230\u7684\u6570\u636E\u7ED3\u6784\u6709\u8BEF\uFF0C\u8981\u6C42\u5982\u4E0B\uFF1A
@@ -2055,9 +2074,9 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     "sort-change",
     "current-change"
   ];
-  const propsType$1 = {
-    filters: propsType$4.filters,
-    columns: propsType$3.columns,
+  const propsType$2 = {
+    filters: propsType$5.filters,
+    columns: propsType$4.columns,
     getData: {
       type: Function,
       required: true
@@ -2100,12 +2119,12 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     "got-data",
     ...epTableCommonEventNames
   ];
-  const __default__$1 = vue.defineComponent({
+  const __default__$2 = vue.defineComponent({
     name: "jlc-pro-table"
   });
-  const _sfc_main$2 = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$1,
-    props: propsType$1,
+  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$2,
+    props: propsType$2,
     emits: emitsType,
     setup(__props, { expose, emit }) {
       const props = __props;
@@ -2213,7 +2232,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
           _ctx.filters.length ? {
             name: "filter",
             fn: vue.withCtx(() => [
-              vue.createVNode(vue.unref(Filter), vue.mergeProps({
+              vue.createVNode(vue.unref(JlcFilter), vue.mergeProps({
                 ref_key: "filterRef",
                 ref: filterRef
               }, _ctx.filterProps, vue.toHandlers(_ctx.filterEvents), {
@@ -2241,7 +2260,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
           _ctx.isPage ? {
             name: "page",
             fn: vue.withCtx(() => [
-              vue.createVNode(vue.unref(_sfc_main$3), vue.mergeProps({
+              vue.createVNode(vue.unref(_sfc_main$4), vue.mergeProps({
                 ref_key: "pageRef",
                 ref: pageRef
               }, _ctx.pageProps, vue.toHandlers(_ctx.pageEvents), {
@@ -2262,7 +2281,7 @@ var jlcAdmin = function(exports, vue, elementPlus) {
   const _hoisted_2$1 = { class: "transfer-tree__check-all" };
   const _hoisted_3 = { class: "transfer-tree__search" };
   const _hoisted_4 = { class: "transfer-tree__main" };
-  const _sfc_main$1 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$2 = /* @__PURE__ */ vue.defineComponent({
     __name: "tree",
     props: {
       props: { default: () => ({}) },
@@ -2412,8 +2431,8 @@ var jlcAdmin = function(exports, vue, elementPlus) {
     }
   });
   const tree_vue_vue_type_style_index_0_scoped_3a26171a_lang = "";
-  const Tree = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-3a26171a"]]);
-  const propsType = {
+  const Tree = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-3a26171a"]]);
+  const propsType$1 = {
     data: {
       type: Array,
       default: []
@@ -2437,12 +2456,12 @@ var jlcAdmin = function(exports, vue, elementPlus) {
   };
   const _hoisted_1 = { class: "tree-transfer" };
   const _hoisted_2 = { class: "tree-transfer__ctrl" };
-  const __default__ = vue.defineComponent({
+  const __default__$1 = vue.defineComponent({
     name: "jlc-tree-transfer"
   });
-  const _sfc_main = /* @__PURE__ */ vue.defineComponent({
-    ...__default__,
-    props: propsType,
+  const _sfc_main$1 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$1,
+    props: propsType$1,
     setup(__props, { expose }) {
       const compProps = __props;
       const props = vue.computed(() => {
@@ -2572,15 +2591,33 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       };
     }
   });
-  const treeTransfer_vue_vue_type_style_index_0_scoped_633ecc7a_lang = "";
-  const TreeTransfer = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-633ecc7a"]]);
+  const treeTransfer_vue_vue_type_style_index_0_scoped_6804a2c7_lang = "";
+  const TreeTransfer = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-6804a2c7"]]);
+  const propsType = {
+    transformPageData: Function
+  };
+  const __default__ = vue.defineComponent({
+    name: "jlc-config-provider"
+  });
+  const _sfc_main = /* @__PURE__ */ vue.defineComponent({
+    ...__default__,
+    props: propsType,
+    setup(__props) {
+      const props = __props;
+      vue.provide(configProviderContextKey, props);
+      return (_ctx, _cache) => {
+        return vue.renderSlot(_ctx.$slots, "default");
+      };
+    }
+  });
   const components = [
     FilterPageList,
-    Filter,
+    JlcFilter,
     Table,
+    _sfc_main$4,
     _sfc_main$3,
-    _sfc_main$2,
-    TreeTransfer
+    TreeTransfer,
+    _sfc_main
   ];
   const index = {
     install(app) {
@@ -2589,10 +2626,11 @@ var jlcAdmin = function(exports, vue, elementPlus) {
       });
     }
   };
-  exports.JlcFilter = Filter;
+  exports.JlcConfigProvider = _sfc_main;
+  exports.JlcFilter = JlcFilter;
   exports.JlcLayoutFilterPageList = FilterPageList;
-  exports.JlcPage = _sfc_main$3;
-  exports.JlcProTable = _sfc_main$2;
+  exports.JlcPage = _sfc_main$4;
+  exports.JlcProTable = _sfc_main$3;
   exports.JlcTable = Table;
   exports.JlcTreeTransfer = TreeTransfer;
   exports.default = index;

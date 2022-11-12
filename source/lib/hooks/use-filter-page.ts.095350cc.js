@@ -1,7 +1,9 @@
 "use strict";
 const vue = require("vue");
 const constants_index_ts = require("../constants/index.ts.f7755b2c.js");
+const utils_globalConfig_ts = require("../utils/global-config.ts.3f269d76.js");
 const useFilterPage = ({ props, emit, params }) => {
+  const globalConfig = vue.inject(utils_globalConfig_ts.configProviderContextKey, {});
   const filterRef = vue.ref();
   const pageRef = vue.ref();
   const total = vue.ref(0);
@@ -97,6 +99,9 @@ const useFilterPage = ({ props, emit, params }) => {
     });
   };
   const handleQueryData = (queryData2) => {
+    if (globalConfig == null ? void 0 : globalConfig.transformPageData) {
+      queryData2 = globalConfig.transformPageData(queryData2);
+    }
     const throwErr = () => {
       const errMsg = `
       [jlc-table] getData\u63A5\u6536\u5230\u7684\u6570\u636E\u7ED3\u6784\u6709\u8BEF\uFF0C\u8981\u6C42\u5982\u4E0B\uFF1A

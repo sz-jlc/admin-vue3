@@ -1,6 +1,7 @@
 import { DEFAULT_PAGE_SIZE } from '@/constants'
 import type { Ref } from 'vue'
 import type { Data } from '@/types'
+import { configProviderContextKey } from '@/utils/global-config'
 
 interface Params {
   props: {
@@ -13,6 +14,9 @@ interface Params {
 }
 
 const useFilterPage = ({ props, emit, params }: Params) => {
+
+  const globalConfig = inject(configProviderContextKey, {} as any)
+
   const filterRef = ref()
   const pageRef = ref()
 
@@ -122,6 +126,9 @@ const useFilterPage = ({ props, emit, params }: Params) => {
   }
 
   const handleQueryData = (queryData: Data) => {
+    if (globalConfig?.transformPageData) {
+      queryData = globalConfig.transformPageData(queryData)
+    }
     const throwErr = () => {
       const errMsg = `
       [jlc-table] getData接收到的数据结构有误，要求如下：

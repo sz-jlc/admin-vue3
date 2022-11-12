@@ -5,7 +5,8 @@ import JlcTable from './components/table';
 import JlcPage from './components/page';
 import JlcProTable from './components/pro-table';
 import JlcTreeTransfer from './components/tree-transfer';
-export { JlcLayoutFilterPageList, JlcFilter, JlcTable, JlcPage, JlcProTable, JlcTreeTransfer };
+import JlcConfigProvider from './components/config-provider';
+export { JlcLayoutFilterPageList, JlcFilter, JlcTable, JlcPage, JlcProTable, JlcTreeTransfer, JlcConfigProvider };
 declare const _default: {
     install(app: App): void;
 };

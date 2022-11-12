@@ -1,6 +1,8 @@
-import { ref, computed, onMounted } from "vue";
+import { inject, ref, computed, onMounted } from "vue";
 import { D as DEFAULT_PAGE_SIZE } from "../constants/index.ts.fd940317.mjs";
+import { c as configProviderContextKey } from "../utils/global-config.ts.edf1d8aa.mjs";
 const useFilterPage = ({ props, emit, params }) => {
+  const globalConfig = inject(configProviderContextKey, {});
   const filterRef = ref();
   const pageRef = ref();
   const total = ref(0);
@@ -96,6 +98,9 @@ const useFilterPage = ({ props, emit, params }) => {
     });
   };
   const handleQueryData = (queryData2) => {
+    if (globalConfig == null ? void 0 : globalConfig.transformPageData) {
+      queryData2 = globalConfig.transformPageData(queryData2);
+    }
     const throwErr = () => {
       const errMsg = `
       [jlc-table] getData\u63A5\u6536\u5230\u7684\u6570\u636E\u7ED3\u6784\u6709\u8BEF\uFF0C\u8981\u6C42\u5982\u4E0B\uFF1A
