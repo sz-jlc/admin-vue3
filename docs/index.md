@@ -15,7 +15,7 @@ hero:
       text: Github
       link: https://github.com/sz-jlc/admin-vue3
   image: 
-    src: /assets/svg/Illustration.svg
+    src: /assets/svg/Online research_Two Color.svg
     alt: JlcAdmin
 features:
   - icon: 🙂
